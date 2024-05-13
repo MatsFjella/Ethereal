@@ -1,0 +1,283 @@
+{
+    "dashboard": {
+        "title": "Bienvenido, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Alertas",
+        "citizens": "Ciudadanos",
+        "invoices": "Facturas",
+        "doctors": "Personal en servicio"
+    },
+    "alerts": {
+        "title": "Alertss",
+        "subtitle": "Ver a tiempo real alertas",
+        "form": "Enviar una alerta",
+        "button": "Enviar alerta",
+        "name": "Título de la alerta",
+        "description": "Descripción",
+        "notification": {
+            "take": {
+                "title": "Alerta",
+                "message": "¿Quieres aceptar esta alerta?"
+            },
+            "sent": {
+                "title": "Alerta enviada",
+                "message": "¡Enviaste la alerta a los otros doctores!"
+            },
+            "opened": {
+                "title": "Nueva Alerta",
+                "message": "¡Tienes una nueva alerta! Vaya a la pestaña de alertas para verlo."
+            },
+            "closed": {
+                "title": "Nueva Alerta",
+                "message": "¡Tienes una nueva alerta! Abra el MDT y vaya a la pestaña de alertas para verlo."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Incidentes",
+        "subtitle": "Buscar incidentes",
+        "form": "Buscar incidentes",
+        "create": "Crear un incidente",
+        "button": "Crear un incidente",
+        "name": "Nombre",
+        "description": "Descripción",
+        "players": "Ciudadanos involucrados",
+        "doctors": "Doctores involucrados",
+        "invoices": "Facturas",
+        "invoice_reduction": "Reducción de factura ({{amount}}$)",
+        "invoice_full": "Facturas ({{amount}}$) {{reduction}}",
+        "reducted": "reducido",
+        "screenshot": "Tomar una captura de pantalla",
+        "tabs": {
+            "link": "Enlace",
+            "screenshot": "Screenshot"
+        },
+        "incident": {
+            "title": "Incidente #{{id}}",
+            "subtitle": "Este incidente fue creado {{date}}"
+        },
+        "tooltip": {
+            "description": "Puedes editar la descripción."
+        },
+        "modal": {
+            "delete": {
+                "title": "Eliminar",
+                "message": "¿Quieres eliminar este incidente?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Algo salió mal al crear el incidente, ¡inténtalo de nuevo!"
+            },
+            "update": {
+                "title": "Incidente actualizado",
+                "message": "Ha cambiado con éxito la descripción del incidente #{{id}}"
+            },
+            "delete": {
+                "title": "Incidente eliminado",
+                "message": "Has eliminado correctamente el incidente. #{{id}}"
+            },
+            "success": {
+                "title": "Incidente createdo",
+                "message": "Incidente #{{id}} ha sido eliminado"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Ciudadanos",
+        "subtitle": "Buscar ciudadanos",
+        "form": "Buscar ciudadanos",
+        "incidents": "Incidentes",
+        "citizen": {
+            "title": "Ciudadanos",
+            "subtitle": "Ver toda la información sobre este ciudadano"
+        }
+    },
+    "codes": {
+        "title": "Codigos",
+        "subtitle": "Buscar o crear códigos",
+        "form": "Buscar códigos",
+        "create": "Crear códigos",
+        "button": "Crear código",
+        "name": "Nombre",
+        "format": "Código ({{format}})",
+        "code": {
+            "title": "Código ({{code}})",
+            "subtitle": "Este código fue creado {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Borrar",
+                "message": "¿Quieres eliminar este código?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Algo salió mal al crear el código, ¡inténtalo de nuevo!"
+            },
+            "update": {
+                "title": "Código actualizado",
+                "message": "Ha cambiado con éxito el código con id {{id}}"
+            },
+            "delete": {
+                "title": "Código eliminado",
+                "message": "Has eliminado correctamente el código. #{{id}}"
+            },
+            "success": {
+                "title": "Código creado",
+                "message": "Código #{{id}} ha sido creado"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Facturas",
+        "subtitle": "Buscar o crear facturas",
+        "form": "Buscar facturas",
+        "create": "Crear una factura",
+        "button": "Crear factura",
+        "name": "Nombre",
+        "amount": "Cantidad",
+        "invoice": {
+            "title": "Factura #{{id}}",
+            "subtitle": "Esta factura fue creada {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Eliminar",
+                "message": "¿Quieres eliminar esta factura?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Algo salió mal al crear la factura, ¡inténtalo de nuevo!"
+            },
+            "update": {
+                "title": "Factura actualizada",
+                "message": "Ha cambiado con éxito la factura con id {{id}}"
+            },
+            "delete": {
+                "title": "Factura eliminada",
+                "message": "Has eliminado correctamente la factura #{{id}}"
+            },
+            "success": {
+                "title": "Factura creada",
+                "message": "Factura #{{id}} ha sido creada"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Personal",
+        "subtitle": "Ver todo el personal"
+    },
+    "configuration": {
+        "title": "Configuración",
+        "subtitle": "Personaliza el MDT a tu gusto.",
+        "colors": "Colores",
+        "main_color": "Color principal",
+        "secondary_color": "Color secundario",
+        "third_color": "tercer color",
+        "highlight_color": "Resaltar color",
+        "contrast_color": "Color de contraste",
+        "text_color": "Color de texto",
+        "language": "Languaje",
+        "reset": "Reiniciar ajustes",
+        "placeholder": "🌎 Languaje",
+        "tooltip": {
+            "language": "¡Esta opción no cambiará el idioma para todos los usuarios!"
+        }
+    },
+    "chat": {
+        "placeholder": "Escribe un mensaje.."
+    },
+    "errors": {
+        "incidents": {
+            "name": {
+                "length": "El nombre debe tener más de 3 caracteres.",
+                "required": "Debe proporcionar un nombre"
+            },
+            "description": {
+                "length": "La descripción debe tener más de 10 caracteres.",
+                "required": "Debe proporcionar una descripción"
+            },
+            "players": {
+                "length": "Debe seleccionar al menos 1 ciudadano",
+                "required": "Debes seleccionar un ciudadano involucrado"
+            },
+            "doctors": {
+                "length": "Debe seleccionar al menos 1 médico",
+                "required": "Debe seleccionar un médico involucrado"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "La alerta debe tener un título."
+            },
+            "description": {
+                "required": "Debes escribir algo en la descripción de la alerta"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Debe proporcionar un nombre"
+            },
+            "code": {
+                "required": "Debe proporcionar un código",
+                "format": "El formato del código es incorrecto."
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Debe proporcionar un nombre"
+            },
+            "amount": {
+                "required": "Debes establecer una cantidad"
+            }
+        }
+    },
+    "list": {
+        "not_found": "No se han encontrado resultados"
+    },
+    "modal": {
+        "confirm": "Confirmar",
+        "close": "Cerrar"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Haga clic en el icono de guardar para guardar los valores",
+            "visit": "Haga clic aquí para visitar el perfil del propietario",
+            "waypoint": "Haga clic aquí para establecer un waypoint a esta propiedad",
+            "image": "Haga clic izquierdo para editar la imagen | Click derecho para ampliar la imagen"
+        }
+    },
+    "words": {
+        "search": "Buscar",
+        "name": "Nombre",
+        "description": "Descripción",
+        "amount": "Cantidad",
+        "information": "Información",
+        "firstname": "Nombre de pila",
+        "lastname": "Apellido",
+        "gender": "Género",
+        "birth": "Fecha de nacimiento",
+        "phone": "Número de teléfono",
+        "job": "Trabajo",
+        "yes": "Si",
+        "no": "No",
+        "online": "Online",
+        "offline": "Offline",
+        "exit": "Salida"
+    },
+    "pages": {
+        "dashboard": "Panel",
+        "incidents": "Incidentes",
+        "doctors": "Personal",
+        "alerts": "Alertas",
+        "citizens": "Ciudadanos",
+        "invoices": "Facturas",
+        "codes": "Códigos",
+        "config": "Configuración"
+    }
+}

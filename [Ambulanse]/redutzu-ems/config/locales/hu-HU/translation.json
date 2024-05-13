@@ -1,0 +1,283 @@
+{
+    "dashboard": {
+        "title": "Üdvözöljük, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Riasztások",
+        "citizens": "Állampolgárok",
+        "invoices": "Számlák",
+        "doctors": "Aktiv orvosok"
+    },
+    "alerts": {
+        "title": "Riasztások",
+        "subtitle": "Tekintse meg a valós idejü mentöriasztásokat",
+        "form": "Irjon egy riasztást",
+        "button": "Riasztás küldése",
+        "name": "Riasztás cime",
+        "description": "Leirás",
+        "notification": {
+            "take": {
+                "title": "Riasztás",
+                "message": "Szeretné fogadni ezt a riasztást?"
+            },
+            "sent": {
+                "title": "Riasztás elküldve",
+                "message": "Riasztás elküldve a többi orvosnak!"
+            },
+            "opened": {
+                "title": "Új riasztás",
+                "message": "Új riasztás érkezett! Menjen a riasztások fülre a megtekintéshez."
+            },
+            "closed": {
+                "title": "Új riasztás",
+                "message": "Új riasztás érkezett! Nyissa meg az MDT-t és nyomj a riasztások fülre."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Jelentések",
+        "subtitle": "Jelentések keresése",
+        "form": "Jelentés keresés",
+        "create": "Jelentés létrehozása",
+        "button": "Jelentés készitése",
+        "name": "Név",
+        "description": "Leirás",
+        "players": "Érintett állampolgár",
+        "doctors": "Kezelö orvos",
+        "invoices": "Számlák",
+        "invoice_reduction": "Számla csökkentése ({{amount}}$)",
+        "invoice_full": "Számlák ({{amount}}$) {{reduction}}",
+        "reducted": "csökkentve",
+        "screenshot": "Kép készitése",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Fénykép"
+        },
+        "incident": {
+            "title": "Jelentés #{{id}}",
+            "subtitle": "Jelentés létrehozva: {{date}}"
+        },
+        "tooltip": {
+            "description": "Módosithatja a jelentését"
+        },
+        "modal": {
+            "delete": {
+                "title": "Törlés",
+                "message": "Biztosan törli a jelentést?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Hiba",
+                "message": "Hiba történt a jelentés készitése közben, próbálja újra!"
+            },
+            "update": {
+                "title": "Jelentés frissitve",
+                "message": "Sikeresen megváltoztatta a jelentés leirását #{{id}}"
+            },
+            "delete": {
+                "title": "Jelentés törölve",
+                "message": "Sikeresen törölte a jelentését #{{id}}"
+            },
+            "success": {
+                "title": "Jelentés feladva",
+                "message": "Jelentés #{{id}} sikeresen feladva az adatbázisba"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Állampolgárok",
+        "subtitle": "Állampolgár keresése",
+        "form": "Search citizens",
+        "incidents": "Jelentések",
+        "citizen": {
+            "title": "Állampolgár",
+            "subtitle": "Állampolgárral kapcsolatok információk"
+        }
+    },
+    "codes": {
+        "title": "Kódok",
+        "subtitle": "Kód keresése és létrehozása",
+        "form": "Kód keresése",
+        "create": "Hozzon létre egy kódot",
+        "button": "Kód létrehozása",
+        "name": "Név",
+        "format": "Kód ({{format}})",
+        "code": {
+            "title": "Kód ({{code}})",
+            "subtitle": "Kód létrehozva: {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Törlés",
+                "message": "Biztosan törli a kódot?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Hiba",
+                "message": "Hiba történt a kód létrehozása közben, próbálja újra!"
+            },
+            "update": {
+                "title": "Kód frissitve",
+                "message": "Sikeresen frissitette ezt a kódot: {{id}}"
+            },
+            "delete": {
+                "title": "Kód törölve",
+                "message": "Sikeresen törölte ezt a kódot: #{{id}}"
+            },
+            "success": {
+                "title": "Kód létrehozva",
+                "message": "Kód: #{{id}} sikeresen létrehozva"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Számlák",
+        "subtitle": "Számlák keresése és törlése",
+        "form": "Számla keresése",
+        "create": "Számla létrehozása",
+        "button": "Számla létrehozás",
+        "name": "Név",
+        "amount": "Összeg",
+        "invoice": {
+            "title": "Számla #{{id}}",
+            "subtitle": "Számla létrehozva: {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Törlés",
+                "message": "Biztosan törli ezt a számlát?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Hiba",
+                "message": "Hiba történt a számla törlése közben, próbálja újra!"
+            },
+            "update": {
+                "title": "Számla frissitve",
+                "message": "Sikeresen frissitette a számlát: {{id}}"
+            },
+            "delete": {
+                "title": "Számla törölve",
+                "message": "Sikeresen törölte a számlát: #{{id}}"
+            },
+            "success": {
+                "title": "Számla létrehozása",
+                "message": "Számla: #{{id}} sikeresen létrehozva"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Orvosok",
+        "subtitle": "Aktiv orvosok megtekintése"
+    },
+    "configuration": {
+        "title": "Szerkeztése",
+        "subtitle": "Szerkessze az MDT-je szinét a kedve szerint",
+        "colors": "Szinek",
+        "main_color": "Elsödleges szin",
+        "secondary_color": "Másodlagos szin",
+        "third_color": "Harmadlagos szin",
+        "highlight_color": "Kiemelés szine",
+        "contrast_color": "Kontraszt szine",
+        "text_color": "Szöveg szine",
+        "language": "Nyelv",
+        "reset": "Visszaállitás",
+        "placeholder": "🌎 Nyelv",
+        "tooltip": {
+            "language": "Ez az opció csak számodra állitja a nyelvet!"
+        }
+    },
+    "chat": {
+        "placeholder": "Szöveg irása.."
+    },
+    "errors": {
+        "incidents": {
+            "name": {
+                "length": "Legalább 3 karakter hosszúnak kell lennie a névnek",
+                "required": "Meg kell adnia egy nevet"
+            },
+            "description": {
+                "length": "Legalább 10 karakternek kell lennie a leirásnak",
+                "required": "Meg kell adnia a leirást"
+            },
+            "players": {
+                "length": "Választanod kell egy állampolgárt",
+                "required": "Ki kell választanod az érintett állampolgárt"
+            },
+            "doctors": {
+                "length": "Ki kell választania egy kezelö orvost",
+                "required": "Ki kell választania az értintett orvost"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Meg kell adnia a riasztás cimét"
+            },
+            "description": {
+                "required": "Muszáj irnia leirást a riasztáshoz"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Meg kell adnia egy nevet"
+            },
+            "code": {
+                "required": "Meg kell adnia egy kódot",
+                "format": "Hibás a kód"
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Meg kell adnia egy nevet"
+            },
+            "amount": {
+                "required": "Meg kell adnia egy összeget"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Nincs találat"
+    },
+    "modal": {
+        "confirm": "Megerösités",
+        "close": "Bezárás"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Az értékek mentéséhez kattintson a mentés ikonra",
+            "visit": "Kattintson ide a tulajdonos profiljának megtekintéséhez",
+            "waypoint": "Kattintson ide, ha szertné beállitani a GPS-ét ehhez az ingatlanhoz",
+            "image": "Bal klik a kép szerkeztéséhez | Jobb klik a kép közelitéséhez"
+        }
+    },
+    "words": {
+        "search": "Keresés",
+        "name": "Név",
+        "description": "Leirás",
+        "amount": "Összeg",
+        "information": "Információ",
+        "firstname": "Keresztnév",
+        "lastname": "Vezetéknév",
+        "gender": "Nem",
+        "birth": "Születési idö",
+        "phone": "Telefonszám",
+        "job": "Foglalkozás",
+        "yes": "Igen",
+        "no": "Nem",
+        "online": "Aktiv",
+        "offline": "Inaktiv",
+        "exit": "Kilépés"
+    },
+    "pages": {
+        "dashboard": "Irányitópult",
+        "incidents": "Jelentések",
+        "doctors": "Orvosok",
+        "alerts": "Riasztások",
+        "citizens": "Állampolgárok",
+        "invoices": "Számlák",
+        "codes": "Kódok",
+        "config": "Beállitás"
+    }
+}

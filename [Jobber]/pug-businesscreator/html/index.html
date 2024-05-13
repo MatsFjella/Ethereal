@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Creator</title>
+    <style>
+        /* CSS for styling the UI */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5); 
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+            background-color: #004080;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+
+        select, button, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        select {
+            background-color: #ffffff;
+            color: #000000; 
+        }
+
+        button {
+            background-color: #0080ff; 
+            color: #ffffff; 
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0055cc; 
+        }
+
+        #createBusinessForm {
+            display: none;
+        }
+
+        input#businessName {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input#blipName {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input#blipScale {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input#blipSprite {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input#ingredientAmount1 {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input.ingredientAmount {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input#ThirdEyeText {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input.requiredAmount {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input.SuppliesAmount {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        input.SuppliesPrice {
+            width: 93%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff; 
+            color: #000000; 
+        }
+
+        .close-button {
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            width: 40px; 
+            height: 50px; 
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ffffff;
+            border-radius: 50%; 
+            text-align: center;
+            line-height: 40px; 
+        }
+
+
+        .overlay .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="overlay">
+        <div class="container" id="primaryContainer">
+            <button id="closeButton" class="close-button">X</button>
+            <h2 id="selectHeading">SELECT A BUSINESS TO EDIT</h2>
+            <h2 id="createHeading" style="display: none;">Add A New Business NOTE: THIS DOES NOT CREATE A BUSINESS IN QBCORE OR ESX DATABASE</h2>
+            <select id="businessSelect"></select>
+            <button id="createBusinessButton">Add New Business</button>
+            <form id="createBusinessForm">
+                <label for="businessName">Business Name:</label>
+                <input type="text" id="businessName" name="businessName">
+                <button type="submit">Create</button>
+                <button id="backToSelectionButton2">BACK</button>
+            </form>
+            <button id="toggleEditModeButton" style="display: none;">Edit Business Features</button>
+        </div>
+    
+        <div class="container" id="editBusinessContainer" style="display: none;">
+            <h2>Edit Business Features</h2>
+            <button id="registers">REGISTERS</button>
+            <button id="cookstations">CRAFT STATIONS</button>
+            <button id="trays">TRAYS</button>
+            <button id="storage">STORAGE</button>
+            <button id="supplies">SUPPLIES</button>
+            <button id="seats">SEATS</button>
+            <button id="trashcans">TRASH CANS</button>
+            <button id="blip">BLIP ICON</button>
+            <button id="duty">DUTY TOGGLE</button>
+            <button id="bossmenu">BOSS MENU</button>
+            <button id="locker">LOCKER</button>
+            <button id="animations">ANIMATIONS</button>
+            <button id="props">PROPS</button>
+            <button id="peds">PEDS</button>
+            <button id="zone">ZONE</button>
+            <button id="garage">GARAGE</button>
+            <button id="items">ITEM CREATOR</button>
+
+            <button id="backToSelectionButton">BACK</button>
+        </div>
+
+        <div class="container" id="EditIndividuleItemContainer" style="display: none;">
+            <h2>Edit Business Features</h2>
+            <button id="EditFeature"> </button>
+            <button id="CreateNewFeature">Create new Register</button>
+            <button id="BackToEditBusinessMenu">BACK</button>
+        </div>
+
+        <div class="container" id="editBlipContainer" style="display: none;">
+            <h2>Edit Blip</h2>
+            <label for="blipName">Blip Name:</label>
+            <input type="text" id="blipName">
+            
+            <label for="blipSprite">Blip Sprite: 1-826</label>
+            <input type="text" id="blipSprite">
+            
+            <label for="blipColor">Blip Color:</label>
+            <select id="blipColor">
+
+            </select>
+            
+            <label for="blipScale">Blip Scale:</label>
+            <select id="blipScale">
+                <option value="0.4">0.4</option>
+                <option value="0.5">0.5</option>
+                <option value="0.6">0.6</option>
+                <option value="0.7">0.7</option>
+                <option value="0.8">0.8</option>
+                <option value="0.9">0.9</option>
+                <option value="1.0">1.0</option>
+                <option value="1.1">1.1</option>
+                <option value="1.2">1.2</option>
+                <option value="1.3">1.3</option>
+                <option value="1.4">1.4</option>
+                <option value="1.5">1.5</option>
+                <option value="1.6">1.6</option>
+                <option value="1.7">1.7</option>
+            </select>
+        
+            <button id="confirmBlipChanges">CONFIRM</button>
+            <button id="cancelBlipChanges">BACK</button>
+        </div>
+
+        <div class="container" id="editCookstationsContainer" style="display: none;">
+            <h2>Item Picker for Crafing Station</h2>
+            <p>BUSINESS NAME</p>
+
+            <label for="ThirdEyeText">Station Text: (Drink Station, Crafting Bench)</label>
+            <input type="text" id="ThirdEyeText">
+        
+            <button id="addNewIngredient">NEW ITEM</button>
+            <button id="RemoveItemIngredient">REMOVE ITEM</button>
+            <button id="confirmIngredientChanges">CONFIRM</button>
+            <button id="cancelIngredientChanges">BACK</button>
+        </div>
+
+        <div class="container" id="editCookstationsContainerRequiredItems" style="display: none;">
+            <h2>Select Required items</h2>
+            <p>Main Item Name</p>
+        
+            <button id="addNewRequiredItem">NEW REQUIRED ITEM</button>
+            <button id="RemoveRequiredItem">REMOVE REQUIRED ITEM</button>
+            <button id="confirmRequiredItemChanges">CONFIRM</button>
+            <button id="cancelRequiredItemChanges">CLOSE</button>
+        </div>
+
+        <div class="container" id="editSuppliessContainer" style="display: none;">
+            <h2>Select Supply Items for </h2>
+            <p>BUSINESS NAME</p>
+        
+            <button id="addNewSupplies">NEW ITEM</button>
+            <button id="RemoveSuppliesItems">REMOVE ITEM</button>
+            <button id="confirmSuppliessChanges">CONFIRM</button>
+            <button id="cancelSuppliessChanges">BACK</button>
+        </div>
+    </div>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // JavaScript for interacting with the UI
+        const businessSelect = document.getElementById('businessSelect');
+        const createBusinessButton = document.getElementById('createBusinessButton');
+        const createBusinessForm = document.getElementById('createBusinessForm');
+        const overlay = document.getElementById('overlay');
+        const selectHeading = document.getElementById('selectHeading');
+        const createHeading = document.getElementById('createHeading');
+        const editBusinessContainer = document.getElementById('editBusinessContainer');
+        const toggleEditModeButton = document.getElementById('toggleEditModeButton');
+        const editBusinessHeading = document.querySelector('#editBusinessContainer h2');
+
+        const EditFeatureHeading = document.querySelector('#EditIndividuleItemContainer h2');
+        const EditFeature = document.getElementById('EditFeature');
+        const CreateNewFeatureBotton = document.getElementById('CreateNewFeature');
+
+
+        const editBlipContainer = document.getElementById('editBlipContainer');
+        const confirmBlipChanges = document.getElementById('confirmBlipChanges');
+        const cancelBlipChanges = document.getElementById('cancelBlipChanges');
+
+        const EditCookstationsHeading = document.querySelector('#editCookstationsContainer p');
+
+        const editCookstationsContainer = document.getElementById('editCookstationsContainer');
+        const confirmIngredientChanges = document.getElementById('confirmIngredientChanges');
+        const cancelIngredientChanges = document.getElementById('cancelIngredientChanges');
+
+        //
+        const EditSuppliessHeading = document.querySelector('#editSuppliessContainer p');
+
+        const editSuppliessContainer = document.getElementById('editSuppliessContainer');
+        const confirmSuppliessChanges = document.getElementById('confirmSuppliessChanges');
+        const cancelSuppliessChanges = document.getElementById('cancelSuppliessChanges');
+
+        //
+
+        const EditCookstationsRequiredHeading = document.querySelector('#editCookstationsContainerRequiredItems p');
+        
+        const editRequiredContainer = document.getElementById('editCookstationsContainerRequiredItems');
+        const confirmRequiredChanges = document.getElementById('confirmRequiredItemChanges');
+        const cancelRequiredChanges = document.getElementById('cancelRequiredItemChanges');
+
+
+        var businessData; // Overall business data from the database
+        var selectedValue; // Business editing name
+        var ChosenEditable; // Feature editing name
+        var ItemsList; // All of the owners server items
+        var AllSelectedItemsToCraf; // Going to end up being the table of all of the items that can be crafted at one locations
+        var ItemsCraftable; // Amount of items that are craftable
+        var CraftingTableText;
+        var CurrentSelectedItem; // Current item you are selecting crafting requirements for
+        var selectedOption = false;
+
+        const blipColorSelect = document.getElementById('blipColor');
+
+        const colorNames = {
+            0: "White",
+            1: "Red",
+            2: "Green",
+            3: "Blue",
+            4: "Red",
+            5: "Yellow",
+            6: "Light Red",
+            7: "Violet",
+            8: "Pink",
+            9: "Light Orange",
+            10: "Light Brown",
+            11: "Light Green",
+            12: "Light Blue",
+            13: "Light Purple",
+            14: "Dark Purple",
+            15: "Cyan",
+            16: "Light Yellow",
+            17: "Orange",
+            18: "Light Blue",
+            19: "Dark Pink",
+            20: "Dark Yellow",
+            21: "Dark Orange",
+            22: "Light Gray",
+            23: "Light Pink",
+            24: "Lemon Green",
+            25: "Forest Green",
+            26: "Electric Blue",
+            27: "Bright Purple",
+            28: "Dark Yellow",
+            29: "Dark Blue",
+            30: "Dark Cyan",
+            31: "Light Brown",
+            32: "Light Blue",
+            33: "Light Yellow",
+            34: "Light Pink",
+            35: "Light Red",
+            36: "Beige",
+            37: "White",
+            38: "Blue",
+            39: "Light Gray",
+            40: "Dark Gray",
+            41: "Pink Red",
+            42: "Blue",
+            43: "Light Green",
+            44: "Light Orange",
+            45: "White",
+            46: "Gold",
+            47: "Orange",
+            48: "Brilliant Rose",
+            49: "Red",
+            50: "Medium Purple",
+            51: "Salmon",
+            52: "Dark Green",
+            53: "Blizzard Blue",
+            54: "Oracle Blue",
+            55: "Silver",
+            56: "Brown",
+            57: "Blue",
+            58: "East Bay",
+            59: "Red",
+            60: "Yellow Orange",
+            61: "Mulberry Pink",
+            62: "Alto Gray",
+            63: "Jelly Bean Blue",
+            64: "Dark Orange",
+            65: "Mamba",
+            66: "Yellow Orange",
+            67: "Blue",
+            68: "Blue",
+            69: "Green",
+            70: "Yellow Orange",
+            71: "Yellow Orange",
+            72: "Transparent Black",
+            73: "Yellow Orange",
+            74: "Blue",
+            75: "Red",
+            76: "Deep Red",
+            77: "Blue",
+            78: "Oracle Blue",
+            79: "Transparent Red",
+            80: "Transparent Blue",
+            81: "Orange",
+            82: "Light Green",
+            83: "Purple",
+            84: "Blue",
+            85: "Transparent Black"
+        };
+
+        for (let i = 0; i <= 85; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i} - ${colorNames[i]}`;
+            blipColorSelect.appendChild(option);
+        }
+
+        let dropdown = document.getElementById("ingredient1");
+
+        for (let key in ItemsList) {
+            let item = ItemsList[key];
+            let option = document.createElement("option");
+            option.value = item.name;
+            option.textContent = item.label;
+            dropdown.appendChild(option);
+        }
+
+
+        function showEditBlipModal() {
+            ChosenEditable = "blip";
+            overlay.style.display = 'flex';
+            hideAllModals();
+            editBlipContainer.style.display = 'block';
+        }
+        function showEditCookStationModal() {
+            ChosenEditable = "cookstations";
+            overlay.style.display = 'flex';
+            hideAllModals();
+            EditCookstationsHeading.textContent = selectedValue.toUpperCase();
+            editCookstationsContainer.style.display = 'block';
+        }
+        function showEditSuppliesStorage() {
+            ChosenEditable = "supplies";
+            overlay.style.display = 'flex';
+            hideAllModals();
+            EditSuppliessHeading.textContent = selectedValue.toUpperCase();
+            editSuppliessContainer.style.display = 'block';
+        }
+        function EditSelectedFeatureInLua() {
+            FullyCloseAllUi()
+            $.post('https://'+ GetParentResourceName() +'/EditSelectedFeature', JSON.stringify({
+                Selected: selectedValue, 
+                Chosen: ChosenEditable, 
+            }));
+        }
+        
+        function CreateSelectedFeatureInLua() {
+            FullyCloseAllUi()
+            $.post('https://'+ GetParentResourceName() +'/CreateSelectedFeature', JSON.stringify({
+                Selected: selectedValue, 
+                Chosen: ChosenEditable,
+            }));
+        }
+
+        function hideAllModals() {
+            document.getElementById('primaryContainer').style.display = 'none';
+            document.getElementById('editBusinessContainer').style.display = 'none';
+            document.getElementById('EditIndividuleItemContainer').style.display = 'none';
+            document.getElementById('editBlipContainer').style.display = 'none';
+            document.getElementById('editCookstationsContainer').style.display = 'none';
+            document.getElementById('editCookstationsContainerRequiredItems').style.display = 'none';
+            document.getElementById('editSuppliessContainer').style.display = 'none';
+        }
+
+        function showContainer(containerId) {
+            hideAllModals();
+            document.getElementById(containerId).style.display = 'block';
+        }
+
+
+        function ShowEditFeaturesMenu(Name) {
+            overlay.style.display = 'flex';
+            createBusinessForm.style.display = 'none';
+            selectHeading.style.display = 'none';
+            createHeading.style.display = 'none';
+
+            createBusinessButton.style.display = 'none';
+            businessSelect.style.display = 'none';
+
+            editBusinessContainer.style.display = 'none';
+            toggleEditModeButton.style.display = 'none';
+            ChosenEditable = Name;
+
+            FullyCloseAllUi()
+            $.post('https://'+ GetParentResourceName() +'/CreateSelectedFeature', JSON.stringify({
+                Selected: selectedValue, 
+                Chosen: ChosenEditable,
+            }));
+        }
+
+        function MainBusinessCreatorUI() {
+            overlay.style.display = 'flex';
+            createBusinessForm.style.display = 'none';
+            selectHeading.style.display = 'block';
+            createHeading.style.display = 'none';
+
+            createBusinessButton.style.display = 'block';
+            businessSelect.style.display = 'block';
+
+            editBusinessContainer.style.display = 'none';
+            toggleEditModeButton.style.display = 'block';
+            showContainer('primaryContainer'); 
+        }
+
+        function ShowEditBusinessMenu() {
+
+            if (selectedValue){
+                
+            } else{
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: "You need to make a business first", 
+                    Type: "error", 
+                }));
+                return
+            }
+            overlay.style.display = 'flex';
+            createBusinessForm.style.display = 'none';
+            selectHeading.style.display = 'none';
+            createHeading.style.display = 'none';
+
+            createBusinessButton.style.display = 'none';
+            businessSelect.style.display = 'none';
+            toggleEditModeButton.style.display = 'none';
+
+            editBusinessContainer.style.display = 'block';
+            editBusinessHeading.textContent = "EDIT " + selectedValue.toUpperCase() + " FEATURES";
+            showContainer('editBusinessContainer');
+        }
+
+        toggleEditModeButton.addEventListener('click', () => {
+            ShowEditBusinessMenu();
+        });
+
+        businessSelect.addEventListener('change', () => {
+            selectedOption = businessSelect.options[businessSelect.selectedIndex];
+            selectedValue = selectedOption.value;
+            selectedOption = selectedOption.value;
+        });
+
+
+        document.getElementById('backToSelectionButton').addEventListener('click', () => {
+            MainBusinessCreatorUI();
+        });
+
+        document.getElementById('backToSelectionButton2').addEventListener('click', () => {
+            MainBusinessCreatorUI();
+        });
+
+        document.getElementById('BackToEditBusinessMenu').addEventListener('click', () => {
+            ShowEditBusinessMenu();
+        });
+
+        const closeButton = document.getElementById('closeButton');
+
+        closeButton.addEventListener('click', () => {
+            FullyCloseAllUi();
+        });
+
+        document.getElementById('registers').addEventListener('click', () => {
+            ShowEditFeaturesMenu("registers");
+        });
+        document.getElementById('cookstations').addEventListener('click', () => {
+            ShowEditFeaturesMenu("cookstations");
+        });
+        document.getElementById('trays').addEventListener('click', () => {
+            ShowEditFeaturesMenu("trays");
+        });
+        document.getElementById('storage').addEventListener('click', () => {
+            ShowEditFeaturesMenu("storage");
+        });
+        document.getElementById('supplies').addEventListener('click', () => {
+            ShowEditFeaturesMenu("supplies");
+        });
+        document.getElementById('seats').addEventListener('click', () => {
+            ShowEditFeaturesMenu("seats");
+        });
+        document.getElementById('trashcans').addEventListener('click', () => {
+            ShowEditFeaturesMenu("trashcans");
+        });
+        document.getElementById('blip').addEventListener('click', () => {
+            ShowEditFeaturesMenu("blip");
+        });
+        document.getElementById('duty').addEventListener('click', () => {
+            ShowEditFeaturesMenu("duty");
+        });
+        document.getElementById('bossmenu').addEventListener('click', () => {
+            ShowEditFeaturesMenu("bossmenu");
+        });
+        document.getElementById('locker').addEventListener('click', () => {
+            ShowEditFeaturesMenu("locker");
+        });
+
+        document.getElementById('animations').addEventListener('click', () => {
+            ShowEditFeaturesMenu("animations");
+        });
+
+        document.getElementById('props').addEventListener('click', () => {
+            ShowEditFeaturesMenu("props");
+        });
+
+        document.getElementById('peds').addEventListener('click', () => {
+            ShowEditFeaturesMenu("peds");
+        });
+
+        document.getElementById('zone').addEventListener('click', () => {
+            ShowEditFeaturesMenu("zone");
+        });
+
+        document.getElementById('garage').addEventListener('click', () => {
+            ShowEditFeaturesMenu("garage");
+        });
+
+        document.getElementById('items').addEventListener('click', () => {
+            ShowEditFeaturesMenu("items");
+        });
+
+        document.getElementById('EditFeature').addEventListener('click', () => {
+            EditSelectedFeatureInLua();
+        });
+        document.getElementById('CreateNewFeature').addEventListener('click', () => {
+            CreateSelectedFeatureInLua();
+        });
+
+        let ingredientCounter = 0;
+
+        let RequiredItemCounter = 0; 
+
+        let SuppliesCounter = 0;
+
+        function removeIngredientAtIndex(index) {
+            const container = document.getElementById('editCookstationsContainer');
+            const ingredientLabel = document.getElementById(`ingredient${index}`);
+            const amountLabel = document.getElementById(`ingredientAmount${index}`);
+
+            if (ingredientLabel) {
+                container.removeChild(ingredientLabel.previousSibling);
+                container.removeChild(ingredientLabel);
+            }
+            
+            if (amountLabel) {
+                container.removeChild(amountLabel.previousSibling);
+                container.removeChild(amountLabel);
+            }
+        }
+
+        function removeAllAddedIngredients() {
+            while (ingredientCounter >= 1) {
+                removeIngredientAtIndex(ingredientCounter);
+                ingredientCounter--;
+            }
+        }
+
+        function removeLastAddedIngredients() {
+            if (ingredientCounter > 1) { 
+                const container = document.getElementById('editCookstationsContainer');
+                const lastIngredientLabel = document.getElementById(`ingredient${ingredientCounter}`);
+                const lastAmountLabel = document.getElementById(`ingredientAmount${ingredientCounter}`);
+                
+                if (lastIngredientLabel) {
+                    container.removeChild(lastIngredientLabel.previousSibling); 
+                    container.removeChild(lastIngredientLabel);
+                }
+                if (lastAmountLabel) {
+                    container.removeChild(lastAmountLabel.previousSibling);
+                    container.removeChild(lastAmountLabel);
+                }
+                ingredientCounter--;
+            }
+        }
+
+        document.getElementById('RemoveItemIngredient').addEventListener('click', function() {
+            removeLastAddedIngredients()
+        });
+
+        //
+
+        function removeRequirementAtIndex(index) {
+            const container = document.getElementById('editCookstationsContainerRequiredItems');
+            const ingredientLabel = document.getElementById(`required${index}`);
+            const amountLabel = document.getElementById(`requiredAmount${index}`);
+
+            if (ingredientLabel) {
+                container.removeChild(ingredientLabel.previousSibling);
+                container.removeChild(ingredientLabel);
+            }
+            
+            if (amountLabel) {
+                container.removeChild(amountLabel.previousSibling);
+                container.removeChild(amountLabel);
+            }
+        }
+
+        function removeAllAddedRequirements() {
+            while (RequiredItemCounter >= 1) {
+                removeRequirementAtIndex(RequiredItemCounter);
+                RequiredItemCounter--;
+            }
+        }
+
+        function removeLastAddedRequirement() {
+            if (RequiredItemCounter > 1) { 
+                const container = document.getElementById('editCookstationsContainerRequiredItems');
+                const lastIngredientLabel = document.getElementById(`required${RequiredItemCounter}`);
+                const lastAmountLabel = document.getElementById(`requiredAmount${RequiredItemCounter}`);
+                
+                if (lastIngredientLabel) {
+                    container.removeChild(lastIngredientLabel.previousSibling);
+                    container.removeChild(lastIngredientLabel);
+                }
+                if (lastAmountLabel) {
+                    container.removeChild(lastAmountLabel.previousSibling);
+                    container.removeChild(lastAmountLabel);
+                }
+                RequiredItemCounter--;
+            }
+        }
+
+        document.getElementById('RemoveRequiredItem').addEventListener('click', function() {
+            removeLastAddedRequirement()
+        });
+
+        function populateIngredientsDropdown(index) {
+            const container = document.getElementById('editCookstationsContainer');
+
+            const newIngredientLabel = document.createElement('label');
+            newIngredientLabel.setAttribute('for', `ingredient${index}`);
+            newIngredientLabel.textContent = `ITEM (${index}) TO CRAFT:`;
+
+            const newIngredientSelect = document.createElement('select');
+            newIngredientSelect.id = `ingredient${index}`;
+            const defaultOption = document.createElement('option');
+            defaultOption.value = 'default';
+            defaultOption.textContent = 'Pick Items';
+            newIngredientSelect.appendChild(defaultOption);
+
+            const sortedItems = Object.values(ItemsList).sort((a, b) => a.label.localeCompare(b.label));
+
+            for (let item of sortedItems) {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = item.label;
+                newIngredientSelect.appendChild(option);
+            }
+
+            const newAmountLabel = document.createElement('label');
+            newAmountLabel.setAttribute('for', `ingredientAmount${index}`);
+            newAmountLabel.textContent = `ITEM (${index}) AMOUNT TO CRAFT:`;
+
+            const newAmountInput = document.createElement('input');
+            newAmountInput.type = 'number';
+            newAmountInput.id = `ingredientAmount${index}`;
+            newAmountInput.min = '1';
+            newAmountInput.value = '1';
+            newAmountInput.classList.add('ingredientAmount');
+
+            container.insertBefore(newIngredientLabel, document.getElementById('addNewIngredient'));
+            container.insertBefore(newIngredientSelect, document.getElementById('addNewIngredient'));
+            container.insertBefore(newAmountLabel, document.getElementById('addNewIngredient'));
+            container.insertBefore(newAmountInput, document.getElementById('addNewIngredient')); 
+        }
+
+        document.getElementById('addNewIngredient').addEventListener('click', function() {
+            ingredientCounter++;
+            populateIngredientsDropdown(ingredientCounter);
+        });
+
+
+        function populateRequiredItemsDropdown(index) {
+            const container = document.getElementById('editCookstationsContainerRequiredItems');
+
+            const newRequiredItemLabel = document.createElement('label');
+            newRequiredItemLabel.setAttribute('for', `required${index}`);
+            newRequiredItemLabel.textContent = `Required Item (${index}):`;
+
+            const newRequiredItemSelect = document.createElement('select');
+            newRequiredItemSelect.id = `required${index}`;
+            const defaultOption = document.createElement('option');
+            defaultOption.value = 'default';
+            defaultOption.textContent = 'Pick Items';
+            newRequiredItemSelect.appendChild(defaultOption);
+
+            const sortedItems = Object.values(ItemsList).sort((a, b) => a.label.localeCompare(b.label));
+
+            for (let item of sortedItems) {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = item.label;
+                newRequiredItemSelect.appendChild(option);
+            }
+
+            const newRequiredAmountLabel = document.createElement('label');
+            newRequiredAmountLabel.setAttribute('for', `requiredAmount${index}`);
+            newRequiredAmountLabel.textContent = `Required Item (${index}) Amount:`;
+
+            const newRequiredAmountInput = document.createElement('input');
+            newRequiredAmountInput.type = 'number';
+            newRequiredAmountInput.id = `requiredAmount${index}`;
+            newRequiredAmountInput.min = '1';
+            newRequiredAmountInput.value = '1';
+            newRequiredAmountInput.classList.add('requiredAmount');
+
+            container.insertBefore(newRequiredItemLabel, document.getElementById('addNewRequiredItem'));
+            container.insertBefore(newRequiredItemSelect, document.getElementById('addNewRequiredItem'));
+            container.insertBefore(newRequiredAmountLabel, document.getElementById('addNewRequiredItem'));
+            container.insertBefore(newRequiredAmountInput, document.getElementById('addNewRequiredItem')); 
+
+        }
+
+
+        document.getElementById('addNewRequiredItem').addEventListener('click', function() {
+            RequiredItemCounter++;
+            populateRequiredItemsDropdown(RequiredItemCounter);
+        });
+
+
+        function showAddRequiredItemsMenu() {
+            overlay.style.display = 'flex';
+            hideAllModals();
+            editRequiredContainer.style.display = 'block';
+        }
+
+        document.getElementById('confirmIngredientChanges').addEventListener('click', () => {
+            let allIngredientsSelected = true;
+            let unselectedIngredientNumber;
+            ItemsCraftable = ingredientCounter
+
+            for (let i = 1; i <= ingredientCounter; i++) {
+                const currentIngredientElement = document.getElementById(`ingredient${i}`);
+                let currentIngredient;
+
+                if (currentIngredientElement) {
+                    currentIngredient = currentIngredientElement.value;
+                } else {
+                    continue;
+                }
+                
+                if (currentIngredient === 'default') {
+                    allIngredientsSelected = false;
+                    unselectedIngredientNumber = i;
+                    break; 
+                }
+            }
+
+            if (!allIngredientsSelected) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: `Please select an ingredient for Ingredient #${unselectedIngredientNumber}`,
+                    Type: "error",
+                }));
+                return;
+            }
+
+            const ingredientsData = {};
+
+            for (let i = 1; i <= ingredientCounter; i++) {
+                ingredientsData[`Ingredient${i}`] = document.getElementById(`ingredient${i}`).value;
+                ingredientsData[`IngredientAmount${i}`] = document.getElementById(`ingredientAmount${i}`).value;
+            }
+            const CratfText = document.getElementById('ThirdEyeText').value;
+            if (CratfText.length <= 1) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: "The name of the Station Text needs to be at least 2 characters long", 
+                    Type: "error", 
+                }));
+                return; 
+            }
+            CraftingTableText = CratfText;
+
+            AllSelectedItemsToCraf = ingredientsData;
+            let shouldStop = false;
+
+            for (let key in AllSelectedItemsToCraf) {
+                if (shouldStop) {
+                    break;
+                }
+                if (AllSelectedItemsToCraf.hasOwnProperty(key)) {
+                    if ("Ingredient" + ItemsCraftable === key) {
+                        ItemsCraftable--;
+                        shouldStop = true;
+                        EditCookstationsRequiredHeading.textContent = "REQUIRED ITEMS TO CRAFT "+ItemsList[AllSelectedItemsToCraf[key]].label.toUpperCase();
+                        CurrentSelectedItem = AllSelectedItemsToCraf[key];
+                        
+                        showAddRequiredItemsMenu("cookstations");
+                        if (RequiredItemCounter < 1) {
+                            RequiredItemCounter++;
+                            populateRequiredItemsDropdown(RequiredItemCounter);
+                        }
+                    }
+                }
+            }
+
+        });
+
+        document.getElementById('confirmRequiredItemChanges').addEventListener('click', () => {
+            let allRequiredItemsSelected = true;
+            let unselectedRequiredItemNumber;
+
+            for (let i = 1; i <= RequiredItemCounter; i++) {
+                const currentRequiredItemElement = document.getElementById(`required${i}`);
+                let currentRequiredItem;
+
+                if (currentRequiredItemElement) {
+                    currentRequiredItem = currentRequiredItemElement.value;
+                } else {
+                    continue;
+                }
+                
+                if (currentRequiredItem === 'default') {
+                    allRequiredItemsSelected = false;
+                    unselectedRequiredItemNumber = i;
+                    break;
+                }
+            }
+
+            if (!allRequiredItemsSelected) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: `Please select an item for required item #${unselectedRequiredItemNumber}`,
+                    Type: "error",
+                }));
+                return;
+            }
+
+            const requiredItemsData = {};
+
+            for (let i = 1; i <= RequiredItemCounter; i++) {
+                requiredItemsData[`required${i}`] = document.getElementById(`required${i}`).value;
+                requiredItemsData[`requiredAmount${i}`] = document.getElementById(`requiredAmount${i}`).value;
+            }
+
+            for (let key in requiredItemsData) {
+                if (requiredItemsData.hasOwnProperty(key)) {
+                    AllSelectedItemsToCraf = Object.assign(AllSelectedItemsToCraf, requiredItemsData);
+                }
+            }
+            let AmountToCraft;
+            for (let key in AllSelectedItemsToCraf) {
+                if (AllSelectedItemsToCraf.hasOwnProperty(key)) {
+                    let AmountCheck = ItemsCraftable+1
+                    if ("IngredientAmount" + AmountCheck === key) {
+                        AmountToCraft =  AllSelectedItemsToCraf[key];
+                    }
+                }
+            }
+            let FinalTabel = {
+                MainIngredientItem: CurrentSelectedItem,
+                RequiredItemToCraftIt: requiredItemsData,
+                AmountCanCraft: AmountToCraft,
+            }
+
+            $.post('https://'+ GetParentResourceName() +'/AllCraftableDataCB', JSON.stringify(FinalTabel));
+
+
+            let shouldStop = false;
+
+            for (let key in AllSelectedItemsToCraf) {
+                if (shouldStop) {
+                    break;
+                }
+                if (AllSelectedItemsToCraf.hasOwnProperty(key)) {
+                    if ("Ingredient" + ItemsCraftable === key) {
+                        ItemsCraftable--;
+                        shouldStop = true;
+                        
+                        EditCookstationsRequiredHeading.textContent = "REQUIRED ITEMS TO CRAFT "+ItemsList[AllSelectedItemsToCraf[key]].label.toUpperCase();
+                        CurrentSelectedItem = AllSelectedItemsToCraf[key];
+                        removeAllAddedRequirements();
+                        showAddRequiredItemsMenu("cookstations");
+                        if (RequiredItemCounter < 1) {
+                            RequiredItemCounter++;
+                            populateRequiredItemsDropdown(RequiredItemCounter);
+                        }
+                    }
+                }
+            }
+
+            if (!shouldStop) {
+                $.post('https://'+ GetParentResourceName() +'/ConfirmIngredientChanges', JSON.stringify({
+                    Selected: selectedValue, 
+                    Chosen: ChosenEditable,
+                    CratfText: CraftingTableText,
+                }));
+                FullyCloseAllUi();
+            }
+        });
+
+
+        confirmBlipChanges.addEventListener('click', () => {
+            const blipName = document.getElementById('blipName').value;
+            const blipSprite = document.getElementById('blipSprite').value;
+            const blipColor = document.getElementById('blipColor').value;
+            const blipScale = document.getElementById('blipScale').value;
+            
+            if (blipName.length <= 1) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: "The name of the blip needs to be at least 2 characters long", 
+                    Type: "error", 
+                }));
+                return;
+            }
+
+            if (blipSprite < 1 || blipSprite > 826 || isNaN(blipSprite)) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: "The sprite needs to be a digit value less then 826 only", 
+                    Type: "error", 
+                }));
+                return
+            }
+            $.post('https://'+ GetParentResourceName() +'/CreateNewBlip', JSON.stringify({
+                Name: blipName,
+                Sprite: blipSprite,
+                Color: blipColor,
+                Scale: blipScale,
+                Selected: selectedValue, 
+                Chosen: ChosenEditable,
+            }));
+            
+            FullyCloseAllUi();
+        });
+
+        cancelBlipChanges.addEventListener('click', () => {
+            ShowEditBusinessMenu();
+        });
+
+        cancelIngredientChanges.addEventListener('click', () => {
+            removeAllAddedIngredients();
+            removeAllAddedRequirements();
+            removeAllAddedSupplies();
+            ShowEditBusinessMenu();
+        });
+
+        cancelRequiredChanges.addEventListener('click', () => {
+            FullyCloseAllUi();
+        });
+
+
+        function CreateNewBusinessMenu() {
+            overlay.style.display = 'flex';
+            createBusinessForm.style.display = 'block';
+            selectHeading.style.display = 'none';
+            createHeading.style.display = 'block';
+
+            createBusinessButton.style.display = 'none';
+            editBusinessContainer.style.display = 'none';
+            toggleEditModeButton.style.display = 'none';
+        }
+
+        function FullyCloseAllUi() {
+            removeAllAddedIngredients();
+            removeAllAddedRequirements();
+            removeAllAddedSupplies();
+            overlay.style.display = 'none';
+            $.post("https://"+ GetParentResourceName() +"/CloseBusinessUi");
+            $.post("https://"+ GetParentResourceName() +"/RemoveAllCraftableDataCB");
+        }
+
+        document.getElementById('confirmSuppliessChanges').addEventListener('click', () => {
+            let allIngredientsSelected = true;
+            let unselectedIngredientNumber;
+
+            for (let i = 1; i <= SuppliesCounter; i++) {
+                const currentIngredientElement = document.getElementById(`Supplies${i}`);
+                let currentIngredient;
+
+                if (currentIngredientElement) {
+                    currentIngredient = currentIngredientElement.value;
+                } else {
+                    continue;
+                }
+                
+                if (currentIngredient === 'default') {
+                    allIngredientsSelected = false;
+                    unselectedIngredientNumber = i;
+                    break; 
+                }
+            }
+
+            if (!allIngredientsSelected) {
+                $.post('https://'+ GetParentResourceName() +'/SimpleNotify', JSON.stringify({
+                    Notify: `Please select an Supplies for Supplies #${unselectedIngredientNumber}`,
+                    Type: "error",
+                }));
+                return;
+            }
+
+            const ingredientsData = {};
+
+            for (let i = 1; i <= SuppliesCounter; i++) {
+                ingredientsData[`Supplies${i}`] = document.getElementById(`Supplies${i}`).value;
+                ingredientsData[`SuppliesAmount${i}`] = document.getElementById(`SuppliesAmount${i}`).value;
+                ingredientsData[`SuppliesPrice${i}`] = document.getElementById(`SuppliesPrice${i}`).value;
+            }
+
+            $.post('https://'+ GetParentResourceName() +'/ConfirmSuppliesCreation', JSON.stringify({
+                Selected: selectedValue, 
+                Chosen: ChosenEditable,
+                MainData: ingredientsData,
+            }));
+            FullyCloseAllUi();
+
+        });
+
+        function removeSuppliesAtIndex(index) {
+            const container = document.getElementById('editSuppliessContainer');
+            const ingredientLabel = document.getElementById(`Supplies${index}`);
+            const amountLabel = document.getElementById(`SuppliesAmount${index}`);
+            const amountPrice = document.getElementById(`SuppliesPrice${index}`);
+
+            if (ingredientLabel) {
+                container.removeChild(ingredientLabel.previousSibling);
+                container.removeChild(ingredientLabel);
+            }
+            
+            if (amountLabel) {
+                container.removeChild(amountLabel.previousSibling);
+                container.removeChild(amountLabel);
+            }
+
+            if (amountPrice) {
+                container.removeChild(amountPrice.previousSibling);
+                container.removeChild(amountPrice);
+            }
+        }
+
+        function removeAllAddedSupplies() {
+            while (SuppliesCounter >= 1) {
+                removeSuppliesAtIndex(SuppliesCounter);
+                SuppliesCounter--;
+            }
+        }
+
+        function removeLastAddedSupplies() {
+            if (SuppliesCounter > 1) {
+                const container = document.getElementById('editSuppliessContainer');
+                const lastIngredientLabel = document.getElementById(`Supplies${SuppliesCounter}`);
+                const lastAmountLabel = document.getElementById(`SuppliesAmount${SuppliesCounter}`);
+                const lastAmountPrice = document.getElementById(`SuppliesPrice${SuppliesCounter}`);
+                
+                if (lastIngredientLabel) {
+                    container.removeChild(lastIngredientLabel.previousSibling);
+                    container.removeChild(lastIngredientLabel);
+                }
+                if (lastAmountLabel) {
+                    container.removeChild(lastAmountLabel.previousSibling);
+                    container.removeChild(lastAmountLabel);
+                }
+                if (lastAmountPrice) {
+                    container.removeChild(lastAmountPrice.previousSibling);
+                    container.removeChild(lastAmountPrice);
+                }
+                SuppliesCounter--;
+            }
+        }
+
+        document.getElementById('RemoveSuppliesItems').addEventListener('click', function() {
+            removeLastAddedSupplies()
+        });
+
+
+        function populateSuppliesDropdown(index) {
+            const container = document.getElementById('editSuppliessContainer');
+
+            const newIngredientLabel = document.createElement('label');
+            newIngredientLabel.setAttribute('for', `Supplies${index}`);
+            newIngredientLabel.textContent = `SUPPLIES (${index}):`;
+
+            const newIngredientSelect = document.createElement('select');
+            newIngredientSelect.id = `Supplies${index}`;
+            const defaultOption = document.createElement('option');
+            defaultOption.value = 'default';
+            defaultOption.textContent = 'Pick Items';
+            newIngredientSelect.appendChild(defaultOption);
+
+            const sortedItems = Object.values(ItemsList).sort((a, b) => a.label.localeCompare(b.label));
+
+            for (let item of sortedItems) {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = item.label;
+                newIngredientSelect.appendChild(option);
+            }
+
+            const newAmountLabel = document.createElement('label');
+            newAmountLabel.setAttribute('for', `SuppliesAmount${index}`);
+            newAmountLabel.setAttribute('for', `SuppliesPrice${index}`);
+            newAmountLabel.textContent = `SUPPLIES (${index}) AMOUNT:`;
+
+            const newAmountInput = document.createElement('input');
+            newAmountInput.type = 'number';
+            newAmountInput.id = `SuppliesAmount${index}`;
+            newAmountInput.min = '1';
+            newAmountInput.value = '1';
+            newAmountInput.classList.add('SuppliesAmount');
+
+            const newAmountPriceLable = document.createElement('label');
+            newAmountPriceLable.setAttribute('for', `SuppliesPrice${index}`);
+            newAmountPriceLable.textContent = `SUPPLIES (${index}) AMOUNT:`;
+            newAmountPriceLable.textContent = `SUPPLIES (${index}) PRICE:`;
+
+            const newAmountPrice = document.createElement('input');
+            newAmountPrice.type = 'number';
+            newAmountPrice.id = `SuppliesPrice${index}`;
+            newAmountPrice.min = '1';
+            newAmountPrice.value = '1';
+            newAmountPrice.classList.add('SuppliesPrice');
+
+            container.insertBefore(newIngredientLabel, document.getElementById('addNewSupplies'));
+            container.insertBefore(newIngredientSelect, document.getElementById('addNewSupplies'));
+            container.insertBefore(newAmountLabel, document.getElementById('addNewSupplies'));
+            container.insertBefore(newAmountInput, document.getElementById('addNewSupplies')); 
+            container.insertBefore(newAmountPriceLable, document.getElementById('addNewSupplies')); 
+            container.insertBefore(newAmountPrice, document.getElementById('addNewSupplies')); 
+        }
+
+        document.getElementById('addNewSupplies').addEventListener('click', function() {
+            SuppliesCounter++;
+            populateSuppliesDropdown(SuppliesCounter);
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'showBusinessUI') {
+                businessData = event.data.businessData;
+                if (event.data.businessData[0]) {
+                    selectedValue = selectedOption || event.data.businessData[0].job;
+                }
+                const businessSelect = document.getElementById('businessSelect');
+
+                businessSelect.innerHTML = '';
+                var SelectedFound;
+
+                for (const business of businessData) {
+                    if(selectedOption) {
+                        const option = document.createElement('option');
+                        option.textContent = selectedOption;
+                        businessSelect.appendChild(option);
+                        break
+                    } else {
+                        break
+                    }
+                }
+
+                for (const business of businessData) {
+                    const option = document.createElement('option');
+                    if (selectedOption === business.job) {
+                    } else {
+                        option.textContent = business.job;
+                        businessSelect.appendChild(option);
+                    }
+                }
+
+                MainBusinessCreatorUI();
+
+            } else if (event.data.type === 'showEditBlipModal') {
+                selectedValue = event.data.Business;
+                ChosenEditable = event.data.Feature;
+                showEditBlipModal("blip");
+            } else if (event.data.type === 'showEditCookstationsModal') {
+                selectedValue = event.data.Business;
+                ChosenEditable = event.data.Feature;
+                ItemsList = event.data.Item
+                showEditCookStationModal();
+                if (ingredientCounter < 1) {
+                    ingredientCounter++;
+                    populateIngredientsDropdown(ingredientCounter);
+                }
+            } else if (event.data.type === 'showEditSuppliesStorage') {
+                selectedValue = event.data.Business;
+                ChosenEditable = event.data.Feature;
+                ItemsList = event.data.Item
+                showEditSuppliesStorage();
+                if (SuppliesCounter < 1) {
+                    SuppliesCounter++;
+                    populateSuppliesDropdown(SuppliesCounter);
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                FullyCloseAllUi();
+            }
+        });
+
+        createBusinessButton.addEventListener('click', () => {
+            businessSelect.style.display = 'none';
+            createBusinessForm.style.display = 'block';
+            
+            CreateNewBusinessMenu(); 
+        });
+
+        createBusinessForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const businessName = document.getElementById('businessName').value;
+
+            $.post('https://'+ GetParentResourceName() +'/CreateNewBusiness', JSON.stringify({
+                Info: businessName,
+            }));
+
+            createBusinessForm.reset();
+            createBusinessForm.style.display = 'none';
+            businessSelect.style.display = 'block';
+
+            MainBusinessCreatorUI();
+        });
+    </script>
+
+</body>
+</html>

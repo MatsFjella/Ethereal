@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+     <div class="wrapper">
+        <div class="container">
+            <div class="esc-tag">
+                <span class="esc">ESC</span>
+                <span class="go-back">Lukk</span>
+            </div>
+            <div class="header">
+                <h1 class="main-title">Søknadssenter</h1>
+                <div class="toggle-btn">
+                    <div class="tgl-title">Rekrutteringsmodus</div>
+                    <div class="checkbox-wrapper-8">
+                        <input type="checkbox" id="cb3-8" class="tgl tgl-skewed">
+                        <label for="cb3-8" data-tg-on="ON" data-tg-off="OFF" class="tgl-btn"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-cont">
+                <div class="left-box">
+                    <div class="box1">
+                        <div class="view-box">
+                            <h1 class="view-title">Se søknader</h1>
+                            <div class="view-img">
+                                <img src="image/view.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-desc-box">
+                        <img src="image/add-desc.png" class="add-desc-image">
+                        <span class="add-desc-text">Legg til beskrivelse</span>
+                    </div>
+                    
+                </div>    
+                <div class="main-cont">
+                    <div class="app-form-cont">
+                        <div class="app-head">
+                            <img src="image/view-app.png" style="height: 5vh;">
+                            <h1>Se søknader</h1>
+                        </div>
+                        <div class="form-cont">
+                            <div class="players-form-view">
+                                <!-- <div class="player-form">
+                                    <h3>Akansha Chourasia</h3>
+                                    <div class="view-button">
+                                        <button>
+                                            <div class="svg-wrapper-1">
+                                            <div class="svg-wrapper">
+                                                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                                                </svg>
+                                            </div>
+                                            </div>=
+                                            <span>View</span>
+                                        </button>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="no-app-screen">Ingen søknader</div>
+                        </div>
+                    </div>
+                    <div class="application-form">
+                      <div class="app-head">
+                        <h1>Behandle søknader</h1>
+                      </div>
+                      <div class="app-form">
+                        <div class="app-que">
+                            <!-- <div class="admin-questions" id="question-1" ques="1">
+                                <div class="que-head">
+                                    <h4>Question 1</h4>
+                                    <h4>Select Type </h4>
+                                    <i class="fa-solid fa-circle-xmark cross-icon-que"></i>
+                                </div>
+                                <div class="que-cont">
+                                    <div class="question-field">
+                                        <textarea spellcheck="false"  rows="5" cols="10" class="question-textarea" placeholder="Write Question"></textarea>    
+                                    </div>
+                                    <div class="type-select">
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="app-add-btn">
+                            <i class="fa-solid fa-circle-plus add-btn" style="color: #ffffff;"></i>
+                        </div>
+                        <div class="animation-container">
+                            <img src="image/tick.gif" height="100%">
+                        </div>
+                      </div>
+                      <div class="buttons-app">
+                        <div class="save save-ques">Lagre</div>
+                        <div class="save reset-ques">Tilbakestill</div>
+                      </div>
+                    </div>
+                </div>
+                <div class="right-box">
+                    <div class="job-logo">
+                        <img id="myImage" src="image/logo.png" class="rp-logo">
+                        <div class="upload-logo">
+                            <div class="click-header hidden-content">Last opp logo</div>
+                            <div class="hidden-content"><input type="text" name="text" class="input-link" placeholder="Enter URL..."></div>
+                            <div class="hidden-content upload-btn">Trykk for å laste opp</div>
+                        </div>
+                    </div>
+                    <div class="box2">
+                        <div class="create-box">
+                            <h1 class="create-title">Administrer søknadsskjema</h1>
+                            <div class="create-img">
+                                <img src="image/create.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="add-desc-container">
+                    <div class="add-desc-title">
+                        <h1>Legg til beskrivelse</h1>
+                    </div>
+                    <div class="desc-text-area">
+                        <textarea class="description-textarea" placeholder="Enter Description"></textarea>
+                        <p id="word-count">Antall ord: 0/100</p>
+                    </div>
+                    <div class="desc-save-btn-cont">
+                        <div class="save-desc-btn">Lagre beskrivelse</div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="view-container">
+            <div class="player-form-header">
+                <div><h3>Applicants Form</h3></div>
+                <i id="close-ply-app" class="fa-solid fa-circle-xmark cross-icon"></i>
+            </div>
+            <div class="player-form-main">
+                <div class="player-information">
+                    <div class="player-cont">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="player-id">
+                                        <span class="p-id"><i class="fa-solid fa-calendar-days"></i><span class="date-text">&nbsp;2000-10-10</span></span>
+                                    </div>
+                                    <div class="player-photo">
+                                        <div class="player-img">
+                                            <img src="image/user.png" class="playerimage">
+                                        </div>
+                                    </div>
+                                    <div class="player-name">
+                                        <h2 class="p-name">Testnavn</h2>
+                                    </div>
+                                    <div class="player-extra">
+                                        <div class="p-number"><i class="fa-solid fa-phone"></i><span class="number-text">&nbsp 123456789</span><span class="tooltip-number"></span></div>
+                                        <div class="p-extra">
+                                            <div class="p-age">
+                                                <span class="age-title">Bursdag</span>
+                                                <span class="age-value">1999-01-48</span>
+                                            </div>
+                                            <div class="p-blood">
+                                                <span class="blood-title">Kjønn</span>
+                                                <span class="blood-value">Mann</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="player-footer">
+                        <div class="btn-accept">Godta</div>
+                        <div class="btn-reject">Avslå</div>
+                    </div>
+                </div>
+                <div class="players-answers">
+                    <!-- <div class="player-que-answer">
+                        <div class="player-que-header">
+                            <div class="serial-number">1</div>
+                            <div class="admin-question-form"></div>
+                        </div>
+                        <div class="player-que-form-ans"></div>
+                    </div> -->
+                </div>
+                <div class="animation-container animate-2">
+                    <img src="image/tick.gif" height="100%">
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="user-panel-container">
+        <div class="job-select-panel">
+            <div class="job-select-panel-header">
+                <h2 class="job-panel-title"></h2>
+                <div class="job-header-right">
+                    <div class="job-app-btn"></div>
+                    <i class="fa-solid fa-right-from-bracket exit-icon"></i>
+                </div>    
+            </div>
+            <div class="job-select-container">
+                <ul class="cards">
+                    <!-- <li>
+                        <div class="card-bg">
+                            <a href="" class="card">
+                                <img src="image/logo.png" class="card__image" alt="" />
+                                <div class="card__overlay">
+                                    <div class="card__header">
+                                    <svg class="card__arc"><path /></svg>                     
+                                    <div class="card__header-text">
+                                        <h3 class="card__title">POLICE</h3>            
+                                    </div>
+                                    </div>
+                                    <p class="card__description">Chief police officer post vacancy open.Chief police officer post vacancy open. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing</p>
+                                </div>
+                            </a>    
+                        </div>      
+                    </li> -->
+                </ul>
+            </div> 
+            <div class="application-status-container">
+                <div class="application-status-middle">
+                    <!-- <div class="job-form-application">
+                        <h3 class="job-apply-title">Burger Shot job</h3>
+                        <div class="status-btns">
+                            <h3 class="status-title">Status:</h3>
+                            <span class="status-value">Pending<i class="fa-solid fa-circle fa-2xs app-status-icon"></i></span>
+                        </div>
+                        <div class="created-on-btns">
+                            <h3 class="createdon-title">Created On:</h3>
+                            <span class="created-value">2000-12-10<i class="fa-solid fa-calendar-days calendar-icon"></i></span>
+                        </div>
+                        <div class="withdraw-app-btn-2">
+                            <h5 class="withdraw-button">Withdraw</h5>
+                        </div>
+                    </div>
+                    <div class="job-form-application">
+                        <h3 class="job-apply-title">Police Job</h3>
+                        <div class="status-btns">
+                            <h3 class="status-title">Status:</h3>
+                            <span class="status-value">Pending<i class="fa-solid fa-circle fa-2xs app-status-icon"></i></span>
+                        </div>
+                        <div class="created-on-btns">
+                            <h3 class="createdon-title">Created On:</h3>
+                            <span class="created-value">2000-12-10<i class="fa-solid fa-calendar-days calendar-icon"></i></span>
+                        </div>
+                        <div class="withdraw-app-btn">
+                            <h5 class="accept-button">Accept</h5>
+                        </div>
+                        <div class="withdraw-app-btn">
+                            <h5 class="reject-button">Reject</h5>
+                        </div>
+                    </div> -->
+                </div>
+            </div>   
+        </div>
+        <div class="apply-job-container">
+            <div class="apply-form-header">
+                <div><h3>Søknadsskjema</h3></div>
+                <i class="fa-solid fa-circle-xmark apply-cross-icon"></i>
+            </div>
+            <div class="job-apply-form-main">
+                <div class="job-apply-information">
+                    <div class="player-cont">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="player-id">
+                                        <span class="p-id"><i class="fa-solid fa-calendar-days"></i><span class="date-text">&nbsp;2000-10-10</span></span>
+                                    </div>
+                                    <div class="player-photo">
+                                        <div class="player-img">
+                                            <img class="playerimage" src="image/user.png">
+                                        </div>
+                                    </div>
+                                    <div class="player-name">
+                                        <h2 class="p-name">Testnavn</h2>
+                                    </div>
+                                    <div class="player-extra">
+                                        <div class="p-number"><i class="fa-solid fa-phone"></i><span class="number-text">&nbsp 123456789</span><span class="tooltip-number"></span></div>
+                                        <div class="p-extra">
+                                            <div class="p-age">
+                                                <span class="age-title">Bursdag</span>
+                                                <span class="age-value">1999-01-48</span>
+                                            </div>
+                                            <div class="p-blood">
+                                                <span class="blood-title">Kjønn</span>
+                                                <span class="blood-value">Mann</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="player-footer">
+                        <div class="btn-submit">Send</div>
+                        <div class="btn-reset">Tilbakestill</div>
+                    </div>
+                </div>
+                <div class="players-answers">
+                    <!-- <div class="player-que-answer-checkbox">
+                        <div class="player-que-header-checkbox">
+                            <div class="serial-number">1</div>
+                            <div class="admin-question-form add-question-check"></div>
+                            <div class="checkbox-container-answer"><input type="checkbox" id="user_answers" name="myCheckbox" class="checkbox-container-answer-input"></div>
+                        </div>
+                    </div>
+                    <div class="player-que-answer">
+                        <div class="player-que-header">
+                            <div class="exclamation-container"><i class="fa-solid fa-circle-exclamation"></i></div>
+                            <div class="serial-number">2</div>
+                            <div class="admin-question-form"></div>
+                        </div>
+                        <textarea id="user_answers" class="player-que-form-ans"> </textarea>
+                    </div> -->
+                </div>                
+            </div>
+            <div class="areyousure-container">
+                <div class="sure-submit-container">
+                    <h1 class="areyousure-text"></h1>
+                    <div class="sure-btns">
+                        <span class="yes-btn">Ja</span>
+                        <span class="no-btn">Nei</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-panel-icon-2">
+            <img id="user-panel-img-2" src="image/jobsale.gif">
+        </div>
+     </div>
+     <div class="photo-capture-container">
+        <div class="photo-camera">
+            <div class="photo-camera-header">Ta bildet av deg</div>
+            <div class="photo-camera-main">
+                <img src="image/camera.png" class="camera-image-logo">
+                <h2 class="camera-lable">Klikk for å fange</h2>
+            </div>
+        </div>
+        <div class="confirm-photo-container">
+            <div class="photo-view-container">
+                <div class="photo-box">
+                    <img src="image/5220753.png" class="pin-image">
+                    <div class="camera-photo-box">
+                        <div class="player-clicked-photo-container">
+                            <img src="image/user.png" class="clicked-photo-image">
+                        </div>
+                        <div class="player-camera-btns">
+                            <h2 class="camera-card-text"></h2>
+                            <div class="camera-card-btns">
+                                <span class="camera-btn retake-pic">Ta på nytt</span>
+                                <span class="camera-btn submit-pic">Godkjenn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <svg height="108px" width="108px" viewBox="0 0 128 128" class="loader">
+                <defs>
+                  <clipPath id="loader-eyes">
+                    <circle transform="rotate(-40,64,64) translate(0,-56)" r="8" cy="64" cx="64" class="loader__eye1"></circle>
+                    <circle transform="rotate(40,64,64) translate(0,-56)" r="8" cy="64" cx="64" class="loader__eye2"></circle>
+                  </clipPath>
+                  <mask id="loader-mask">
+                    <rect fill="#fff" height="128" width="128" y="0" x="0"></rect>
+                  </mask>
+                </defs>
+                <g stroke-dasharray="175.93 351.86" stroke-width="12" stroke-linecap="round">
+                  <g>
+                    <rect clip-path="url(#loader-eyes)" height="64" width="128" fill="#fff"></rect>
+                    <g stroke="#fff" fill="none">
+                      <circle transform="rotate(180,64,64)" r="56" cy="64" cx="64" class="loader__mouth1"></circle>
+                      <circle transform="rotate(0,64,64)" r="56" cy="64" cx="64" class="loader__mouth2"></circle>
+                    </g>
+                  </g>
+                  <g mask="url(#loader-mask)">
+                    <rect clip-path="url(#loader-eyes)" height="64" width="128" fill="#fff"></rect>
+                    <g stroke="#fff" fill="none">
+                      <circle transform="rotate(180,64,64)" r="56" cy="64" cx="64" class="loader__mouth1"></circle>
+                      <circle transform="rotate(0,64,64)" r="56" cy="64" cx="64" class="loader__mouth2"></circle>
+                    </g>
+                  </g>
+                  <text x="64" y="150" text-anchor="middle" fill="#fff" font-size="18px" font-weight="900">Laster...</text>
+                </g>
+            </svg>
+              
+            <div class="are-you-sure-cancel-camera">
+                <div class="cancel-camera-title">
+                    <img src="image/alert.png">
+                    <h2>Er du sikker på at du vil avbryte? Alle skjemadataene dine tilbakestilles</h2>
+                </div>
+                <div class="camera-cancel-buttons">
+                    <span class="cancel-camera-btn-yes">Ja</span>
+                    <span class="cancel-camera-btn-no">Nei</span>
+                </div>
+            </div>
+        </div>
+        <div class="cancel-container">
+            <div class="cancel-camera-btn">Kanseller</div>
+        </div>
+     </div>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+     <script src="main.js"></script>
+</body>
+
+</html>

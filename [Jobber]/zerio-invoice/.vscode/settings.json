@@ -1,0 +1,9 @@
+{
+    "Lua.diagnostics.globals": [
+        "MySQL",
+        "ESX"
+    ],
+    "Lua.diagnostics.disable": [
+        "param-type-mismatch"
+    ]
+}

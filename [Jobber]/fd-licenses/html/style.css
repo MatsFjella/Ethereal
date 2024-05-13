@@ -1,0 +1,34 @@
+.licenseimg {
+  width: 30%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.licensetext {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+
+.nationalitytext {
+  position: fixed;
+  top: 58.5%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+
+.licensefont {
+  font-family: 'Poppins', sans-serif;
+  font-size: 200%;
+  color: #ffffff;
+}
+.nationalityfont {
+  font-family: 'Poppins', sans-serif;
+  font-size: 100%;
+  color: #ffffff;
+}

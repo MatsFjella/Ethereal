@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+		<script src="https://kit.fontawesome.com/dbb93909f4.js" crossorigin="anonymous"></script>
+		<script src="./libs/jquery/script.js"></script>
+        <script src="./libs/vue/script.js"></script>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="./libs/sweetalert2/script.js"></script>
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./libs/sweetalert2/style.css">
+	    <link rel="stylesheet" href="style.css" type="text/css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+		<v-app data-app>
+			<div id="app">
+				<div class="main5" 
+					v-if="open5"
+				>
+					<div class="top2">
+						<h1 class="top-header"> {{ topHeader }} | Prøvekjøring </h1>
+					</div>
+					<v-container fluid style="height: 630px;">
+						<v-row 
+							dense 
+						>
+							<v-col
+								v-for="(car, i) in searching5"
+								:key="car.id"
+								:cols="6"
+							>
+								<v-card 
+									class="car-image"
+								>
+									<v-img
+										:src="car.image"
+										class="white--text align-end"
+										gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+										height="200px"
+									>
+									</v-img>
+
+									<v-card-actions style="display: block;">
+										<v-card-title 
+											v-text="car.label"
+											style="font-family: 'Montserrat';font-size: 25px;"
+										></v-card-title>
+										<div style="display:flex;justify-content: flex-end;margin-top:5px;">
+											<v-btn
+												elevation="6"
+												right
+												class="float-right"
+												style="color:white;position: relative;right: 0px;"
+												@click="testdrive_car(car)"
+											>
+												Ta ut til testkjøring
+											</v-btn>
+										</div>
+									</v-card-actions>
+								</v-card>
+							</v-col>
+						</v-row>
+					</v-container>
+					<v-text-field
+						filled
+						v-model="testdrivesearch"
+						color="blue-grey lighten-2"
+						label="Search"
+					></v-text-field>
+				</div>
+				<div class="main4" 
+					v-if="open4"
+				>
+					<div class="top2">
+						<h1 class="top-header"> Biltema | Admin meny </h1>
+						<v-toolbar>
+							<v-tabs
+								dark
+								background-color="primary"
+								grow
+							>
+								<v-tab
+									class="addvehicle"
+									@click="set_tab('addvehicle');load_addvehicle();"
+								>
+									Legg til kjøretøy
+								</v-tab>
+								<v-tab
+									class="removevehicle"
+									@click="set_tab('removevehicle');load_removevehicle();"
+								>
+									Fjern kjøretøy
+								</v-tab>
+							</v-tabs>
+						</v-toolbar>
+						<div class="top-shade"></div>
+					</div>
+					<div class="tab-items">
+						<div class="tab-item" id="addvehicle"
+							v-if="tab == 'addvehicle'"
+							style="top:0px;position:absolute;"
+						>
+							<div
+								style="margin-top: 25px;width:70%;margin-left:15%;z-index: 11;"
+								class="custom-select"
+								:tabindex="tabindex"
+								@blur="dropdownOpen5 = false"
+							>
+								<div
+									v-if="selected5 !== -1"
+									class="selected"
+									:class="{dropdownOpen5: open}"
+									@click="dropdownOpen5 = !dropdownOpen5"
+								>
+									{{ cardealers[selected5].label }}
+								</div>
+								<div
+									v-if="selected5 == -1"
+									class="selected"
+									:class="{dropdownOpen5: open}"
+									@click="dropdownOpen5 = !dropdownOpen5"
+								>
+									Jobb / Biltrend
+								</div>
+								<div
+									class="cardealers"
+									:class="{selectHide: !dropdownOpen5}"
+									style="background: #282b56;border-radius: 0px 0px 10px 10px;margin-top: -5px;max-height: 200px;overflow-y: scroll;"
+								>
+									<div
+										class="item"
+										v-for="(option, i) of cardealers"
+										:key="i"
+										@click="selected5=i; selected6 = -1; dropdownOpen5=false; $emit('input', option); categories3 = categories2[cardealers[selected5].name]"
+									>
+										{{ option.label }}
+									</div>
+								</div>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:70%;margin-left:15%;z-index: 10;"
+								class="custom-select"
+								:tabindex="tabindex"
+								@blur="dropdownOpen6 = false"
+							>
+								<div
+									v-if="selected6 !== -1 && selected5 !== -1"
+									class="selected"
+									:class="{dropdownOpen6: open}"
+									@click="dropdownOpen6 = !dropdownOpen6"
+								>
+									{{ (selected6 !== -1 && categories3 !== undefined && categories3[selected6] !== undefined) ? categories3[selected6].label : "" }}
+								</div>
+								<div
+									v-if="selected6 == -1"
+									class="selected"
+									:class="{dropdownOpen6: open}"
+									@click="dropdownOpen6 = !dropdownOpen6;"
+								>
+									Kategori
+								</div>
+								<div
+									class="categories"
+									:class="{selectHide: !dropdownOpen6}"
+									style="background: #282b56;border-radius: 0px 0px 10px 10px;margin-top: -5px;max-height: 200px;overflow-y: scroll;"
+								>
+									<div
+										class="item"
+										v-for="(option, i) of categories3"
+										:key="i"
+										@click="selected6=i; dropdownOpen6=false; $emit('input', option)"
+									>
+										{{ option.label }}
+									</div>
+								</div>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:15%;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="text"
+									class="selected"
+									placeholder="Vehicle Model"
+									style="width:100%;cursor:text!important;"
+									v-model="model"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:10px;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="text"
+									class="selected"
+									placeholder="Vehicle Label"
+									style="width:100%;cursor:text!important;"
+									v-model="label"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:15%;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="number"
+									class="selected"
+									placeholder="Order Price"
+									style="width:100%;cursor:text!important;"
+									v-model="orderprice"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:10px;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="number"
+									class="selected"
+									placeholder="Sale Price"
+									style="width:100%;cursor:text!important;"
+									v-model="saleprice"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:15%;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="text"
+									class="selected"
+									placeholder="Image"
+									style="width:100%;cursor:text!important;"
+									v-model="image"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:10px;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="number"
+									class="selected"
+									placeholder="Top Speed"
+									style="width:100%;cursor:text!important;"
+									v-model="topspeed"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:15%;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="number"
+									class="selected"
+									placeholder="Acceleration"
+									style="width:100%;cursor:text!important;"
+									v-model="acceleration"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:calc(35% - 5px);margin-left:10px;float:left;"
+								class="custom-select"
+							>
+								<input
+									type="number"
+									class="selected"
+									placeholder="Horsepower"
+									style="width:100%;cursor:text!important;"
+									v-model="horsepower"
+								></input>
+							</div>
+
+							<div
+								style="margin-top: 25px;width:70%;margin-left:15%;float:left;"
+								class="custom-select"
+							>
+								<textarea
+									class="selected"
+									placeholder="Description"
+									style="width:100%;cursor:text!important;max-height: 200px;min-height: 47px;height:125px;"
+									v-model="description"
+								></textarea>
+							</div>
+
+							<v-btn
+								elevation="6"
+								right
+								class="float-right"
+								style="color:white;position: absolute;bottom: 30px;left: 50%;transform: translateX(-50%);"
+								@click="add_vehicle()"
+								x-large
+							>
+								Legg til nytt kjøretøy
+							</v-btn>
+						</div>
+						<div class="tab-item" id="removevehicle"
+							v-if="tab == 'removevehicle'"
+							style="top:0px;position:absolute;"
+						>
+							<v-data-table
+								:headers="headers5"
+								:items="adminmenucars"
+								item-key="id"
+								class="elevation-6"
+								:search="search4"
+								:custom-filter="filterOnlyCapsText"
+							>
+								<template v-slot:top>
+									<v-text-field
+										v-model="search4"
+										label="Search"
+										class="mx-4"
+									></v-text-field>
+								</template>
+								<template v-slot:item.actions="{ item }">
+									<v-btn
+										elevation="6"
+										style="position:relative;color:white;"
+										@click="remove_vehicle(item)"
+									>
+										Fjern
+									</v-btn>
+								</template>
+							</v-data-table>
+						</div>
+					</div>
+				</div>
+				<div class="main3" 
+					v-if="open3"
+				>
+					<div class="top2">
+						<h1 class="top-header"> {{ topHeader }} | Katalog </h1>
+					</div>
+					<v-container fluid style="height: 548px;">
+						<v-row 
+							dense 
+						>
+							<v-col
+								v-for="(car, i) in searching4"
+								:key="car.id"
+								:cols="6"
+							>
+								<v-card 
+									class="car-image"
+								>
+									<v-img
+										:src="car.image"
+										class="white--text align-end"
+										gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+										height="200px"
+									>
+									</v-img>
+
+									<v-card-actions style="display: block;">
+										<v-card-title 
+											v-text="car.label + ' | kr' + nf.format(car.saleprice)"
+											style="font-family: 'Montserrat';font-size: 25px;"
+										></v-card-title>
+									</v-card-actions>
+								</v-card>
+							</v-col>
+						</v-row>
+					</v-container>
+					<v-text-field
+						filled
+						v-model="cataloguesearch"
+						color="blue-grey lighten-2"
+						label="Search"
+					></v-text-field>
+				</div>
+				<div class="main2" 
+					v-if="open2"
+				>
+					<div class="top2">
+						<h1 class="top-header"> {{ topHeader }} | Utstillingsmeny </h1>
+					</div>
+					<v-container fluid style="min-height: 323px;">
+						<v-row 
+							dense 
+							:style='{"align-content": "flex-start", "justify-content": searching3.length == 1 ? "center" : "flex-start", "flex-direction": "row", "flex-wrap": "nowrap", "overflow-x":"scroll"}'
+						>
+							<v-col
+								v-for="(car, i) in searching3"
+								:key="car.id"
+								:cols="6"
+							>
+								<v-card 
+									class="car-image"
+								>
+									<v-img
+										:src="car.image"
+										class="white--text align-end"
+										gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+										height="200px"
+									>
+									</v-img>
+
+									<v-card-actions style="display: block;">
+										<v-card-title 
+											v-text="car.label + ' | kr' + nf.format(car.orderprice)"
+											style="font-family: 'Montserrat';font-size: 25px;"
+										></v-card-title>
+										<div style="display:flex;justify-content: flex-end;margin-top:5px;">
+											<v-btn
+												elevation="6"
+												right
+												class="float-right"
+												style="color:white;position: relative;right: 0px;"
+												@click="showcase_car(car)"
+											>
+												Sett på utstilling
+											</v-btn>
+										</div>
+									</v-card-actions>
+								</v-card>
+							</v-col>
+						</v-row>
+					</v-container>
+					<div
+						style="margin-top: 50px;width:70%;margin-left:15%;"
+						class="custom-select"
+						:tabindex="tabindex"
+						@blur="dropdownOpen3 = false"
+					>
+						<div
+							v-if="selected3 !== -1"
+							class="selected"
+							:class="{dropdownOpen3: open}"
+							@click="dropdownOpen3 = !dropdownOpen3"
+						>
+							<div class="color-preview" :style="{background: items[selected3].hex}"></div>
+							{{ items[selected3].label }}
+						</div>
+						<div
+							v-if="selected3 == -1"
+							class="selected"
+							:class="{dropdownOpen3: open}"
+							@click="dropdownOpen3 = !dropdownOpen3"
+						>
+							Primærfarge
+						</div>
+						<div
+							class="items"
+							:class="{selectHide: !dropdownOpen3}"
+						>
+							<div
+								class="item"
+								v-for="(option, i) of items"
+								:key="i"
+								@click="selected3=i; dropdownOpen3=false; $emit('input', option)"
+							>
+								<div class="color-preview" :style="{background: option.hex}"></div>
+								{{ option.label }}
+							</div>
+						</div>
+					</div>
+					<div
+						style="margin-top: 15px;width:70%;margin-left:15%;"
+						class="custom-select"
+						:tabindex="tabindex"
+						@blur="dropdownOpen4 = false"
+					>
+						<div
+							v-if="selected4 !== -1"
+							class="selected"
+							:class="{dropdownOpen4: open}"
+							@click="dropdownOpen4 = !dropdownOpen4"
+						>
+							<div class="color-preview" :style="{background: items[selected4].hex}"></div>
+							{{ items[selected4].label }}
+						</div>
+						<div
+							v-if="selected4 == -1"
+							class="selected"
+							:class="{dropdownOpen4: open}"
+							@click="dropdownOpen4 = !dropdownOpen4"
+						>
+							Sekundærfarge
+						</div>
+						<div
+							class="items"
+							:class="{selectHide: !dropdownOpen4}"
+						>
+							<div
+								class="item"
+								v-for="(option, i) of items"
+								:key="i"
+								@click="selected4=i; dropdownOpen4=false; $emit('input', option)"
+							>
+								<div class="color-preview" :style="{background: option.hex}"></div>
+								{{ option.label }}
+							</div>
+						</div>
+					</div>
+
+					<div class="showcase-bottom">
+						<v-btn elevation="6" style="position: relative; right: auto;" @click="remove_showcase_car()">Fjern kjøretøy</v-btn>
+						<v-text-field
+							filled
+							class="showcasesearch"
+							v-model="showcasesearch"
+							hide-details
+							color="blue-grey lighten-2"
+							label="Search"
+						></v-text-field>
+					</div>
+				</div>
+				<transition mode="out-in" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutRight">
+					<div class="main" 
+						v-if="open"
+					>
+						<div class="top">
+							<h1 class="top-header"> {{ topHeader }} | Hovedmeny </h1>
+							<v-toolbar>
+								<v-tabs
+									dark
+									background-color="primary"
+									grow
+								>
+									<v-tab
+										class="homepage"
+										@click="set_tab('homepage');load_homepage()"
+										v-if="isJobless == false"
+									>
+										Hjem
+									</v-tab>
+									<v-tab
+										class="categories"
+										@click="set_tab('categories')"
+									>
+										Kjøretøy
+									</v-tab>
+							
+									<v-tab
+										class="orders"
+										@click="set_tab('orders');load_orders()"
+									>
+										Ordre
+									</v-tab>
+									<v-tab
+										v-if="isJobless == false"
+										class="stock"
+										@click="set_tab('stock');load_stock()"
+									>
+										På lager
+									</v-tab>
+									<v-tab
+										v-if="isJobless == false"
+										class="sold"
+										@click="set_tab('sold');load_sold()"
+									>
+										Solgte kjøretøy
+									</v-tab>
+								</v-tabs>
+							</v-toolbar>
+							<div class="top-shade"></div>
+						</div>
+						<div class="tab-items">
+							<div class="tab-item" id="homepage"
+								v-if="tab == 'homepage'"
+							>
+								<v-container fluid>
+									<v-row dense>
+										<v-col
+											:cols="4"
+										>
+											<v-card @click="change_tab('orders');load_orders()">
+												<i class="fa-solid fa-list"></i>	
+												<v-card-title class="number">{{orderAmount}}</v-card-title>
+												<v-card-title class="header">Ordrer</v-card-title>
+											</v-card>
+										</v-col>
+										<v-col
+											:cols="4"
+										>
+											<v-card>
+												<i class="fa-solid fa-list"></i>	
+												<v-card-title class="number">${{nf.format(companyMoney)}}</v-card-title>
+												<v-card-title class="header">Penger</v-card-title>
+											</v-card>
+										</v-col>
+										<v-col
+											:cols="4"
+										>
+											<v-card @click="change_tab('stock');load_stock()">
+												<i class="fa-solid fa-list"></i>	
+												<v-card-title class="number">{{stockAmount}}</v-card-title>
+												<v-card-title class="header">Lager</v-card-title>
+											</v-card>
+										</v-col>
+										<v-col
+											:cols="4"
+										>
+											<v-card>
+												<i class="fa-solid fa-list"></i>	
+												<v-card-title class="number">${{nf.format(stockValue)}}</v-card-title>
+												<v-card-title class="header">Lagerverdi</v-card-title>
+											</v-card>
+										</v-col>
+									</v-row>
+								</v-container>
+							</div>
+							<div class="tab-item" id="categories"
+								v-if="tab == 'categories'"
+							>
+								<v-container fluid>
+									<v-row dense>
+										<v-col
+											v-for="(category, i) in searching"
+											:key="category.title"
+											:cols="4"
+										>
+											<v-card
+												class="category-image"
+												@click="view_vehicles(category)"
+											>
+												<v-img
+													:src="'images/categories/' + category.image"
+													class="white--text align-end"
+													gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+													height="200px"
+												>
+												</v-img>
+
+												<v-card-actions>
+													<v-card-title v-text="category.label"></v-card-title>
+													<v-btn
+														elevation="6"
+														right
+														class="float-right"
+													>
+														Se
+													</v-btn>
+												</v-card-actions>
+											</v-card>
+										</v-col>
+									</v-row>
+								</v-container>
+								<v-text-field
+									filled
+									v-model="categorysearch"
+									color="blue-grey lighten-2"
+									label="Search"
+								></v-text-field>
+							</div>
+							<div class="tab-item" id="vehicles"
+								v-if="tab == 'vehicles'"
+							>
+								<v-container fluid>
+									<v-row dense>
+										<v-col
+											v-for="(car, i) in searching2"
+											:key="car.label"
+											:cols="5"
+										>
+											<v-card 
+												class="car-image"
+												@click="view_vehicle(car)"
+											>
+												<v-img
+													:src="car.image"
+													class="white--text align-end"
+													gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+													height="200px"
+												>
+												</v-img>
+
+												<v-card-actions style="display: block;">
+													<v-card-title 
+														v-text="car.label"
+														style="font-family: 'Montserrat';font-size: 25px;"
+													></v-card-title>
+													<div style="display:flex">
+														<v-card-title 
+															v-text="'Price: $' + nf.format(car.orderprice)"
+															style="font-family: 'Roboto';font-weight: 300;font-size: 19px;"
+														></v-card-title>
+														<v-btn
+															elevation="6"
+															right
+															class="float-right"
+														>
+															Se
+														</v-btn>
+													</div>
+												</v-card-actions>
+											</v-card>
+										</v-col>
+									</v-row>
+								</v-container>
+								<v-text-field
+									filled
+									v-model="carssearch"
+									color="blue-grey lighten-2"
+									label="Search"
+								></v-text-field>
+							</div>
+							<div class="tab-item"
+								v-if="tab == 'vehicle'"
+							>
+								<div>
+									<v-img
+										:src="car.image"
+										class="white--text align-end"
+										gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+										height="250px"
+										width="444.444445px"
+										style="left: 50px;margin-top: 50px;border-radius: 15px 15px 0px 0px;"
+									>
+									</v-img>
+									<div class="progressbar" style="left: 75px;">
+										<v-progress-circular
+											:rotate="-90"
+											:size="100"
+											:width="15"
+											:value="car.topspeed / 4"
+										>
+											{{ car.topspeed }}
+										</v-progress-circular>
+										<h1>Toppfart</h1>
+									</div>
+									<div class="progressbar" style="left: 210px;">
+										<v-progress-circular
+											:rotate="-90"
+											:size="100"
+											:width="15"
+											:value="car.acceleration"
+										>
+											{{ car.acceleration }}
+										</v-progress-circular>
+										<h1>Akkselerasjon</h1>
+									</div>
+									<div class="progressbar" style="left: 345px;">
+										<v-progress-circular
+											:rotate="-90"
+											:size="100"
+											:width="15"
+											:value="car.horsepower / 10"
+										>
+											{{ car.horsepower }}
+										</v-progress-circular>
+										<h1>Hestekrefter</h1>
+									</div>
+								</div>
+								<div class="vehicledata">
+									<h1 class="vehicledata-header">{{ car.label }}</h1>
+									<h1 class="vehicledata-description">{{ car.description }}</h1>
+
+									<div
+										style="margin-top: 50px;"
+										class="custom-select"
+										:tabindex="tabindex"
+										@blur="dropdownOpen = false"
+									>
+										<div
+											v-if="selected !== -1"
+											class="selected"
+											:class="{dropdownOpen: open}"
+											@click="dropdownOpen = !dropdownOpen"
+										>
+											<div class="color-preview" :style="{background: items[selected].hex}"></div>
+											{{ items[selected].label }}
+										</div>
+										<div
+											v-if="selected == -1"
+											class="selected"
+											:class="{dropdownOpen: open}"
+											@click="dropdownOpen = !dropdownOpen"
+										>
+											Primær farger
+										</div>
+										<div
+										class="items"
+										:class="{selectHide: !dropdownOpen}"
+										>
+											<div
+												class="item"
+												v-for="(option, i) of items"
+												:key="i"
+												@click="selected=i; dropdownOpen=false; $emit('input', option)"
+											>
+												<div class="color-preview" :style="{background: option.hex}"></div>
+												{{ option.label }}
+											</div>
+										</div>
+									</div>
+									<div
+										style="margin-top: 15px;"
+										class="custom-select"
+										:tabindex="tabindex"
+										@blur="dropdownOpen2 = false"
+									>
+										<div
+											v-if="selected2 !== -1"
+											class="selected"
+											:class="{dropdownOpen2: open}"
+											@click="dropdownOpen2 = !dropdownOpen2"
+										>
+											<div class="color-preview" :style="{background: items[selected2].hex}"></div>
+											{{ items[selected2].label }}
+										</div>
+										<div
+											v-if="selected2 == -1"
+											class="selected"
+											:class="{dropdownOpen2: open}"
+											@click="dropdownOpen2 = !dropdownOpen2"
+										>
+											Sekundærfarge
+										</div>
+										<div
+										class="items"
+										:class="{selectHide: !dropdownOpen2}"
+										>
+											<div
+												class="item"
+												v-for="(option, i) of items"
+												:key="i"
+												@click="selected2=i; dropdownOpen2=false; $emit('input', option)"
+											>
+												<div class="color-preview" :style="{background: option.hex}"></div>
+												{{ option.label }}
+											</div>
+										</div>
+									</div>
+
+									<v-btn
+										elevation="6"
+										right
+										class="float-right"
+										style="margin-top: 100px;padding-left: 20px;padding-right: 20px;right: 200px;"
+										@click="view_vehicles(category)"
+									>
+										Tilbake
+									</v-btn>
+									<v-btn
+										elevation="6"
+										right
+										class="float-right"
+										style="margin-top: 100px;padding-left: 50px;padding-right: 50px;"
+										@click="order_vehicle(car)"
+										v-if="isJobless == false"
+									>
+										Ordre
+									</v-btn>
+									<v-btn
+										elevation="6"
+										right
+										class="float-right"
+										style="margin-top: 100px;padding-left: 50px;padding-right: 50px;"
+										@click="order_jobless_vehicle(car)"
+										v-if="isJobless"
+									>
+										Ordre
+									</v-btn>
+								</div>
+							</div>
+							<div class="tab-item" id="orders"
+								v-if="tab == 'orders'"
+							>
+								<v-data-table
+									:headers="isJobless ? headers4 : headers"
+									:items="orders"
+									item-key="id"
+									class="elevation-6"
+									:search="search"
+									:custom-filter="filterOnlyCapsText"
+								>
+									<template v-slot:top>
+										<v-text-field
+											v-model="search"
+											label="Search"
+											class="mx-4"
+										></v-text-field>
+									</template>
+									<template v-slot:item.actions="{ item }">
+										<v-btn
+											elevation="6"
+											style="position:relative;color:white;"
+											@click="collect_vehicle(item)"
+											v-if="item.timeleft == 'None'"
+										>
+											Samle
+										</v-btn>
+									</template>
+								</v-data-table>
+							</div>
+							<div class="tab-item"
+								v-if="tab == 'stock'"
+							>
+								<v-data-table
+									:headers="headers2"
+									:items="stock"
+									item-key="id"
+									class="elevation-6"
+									:search="search2"
+									:custom-filter="filterOnlyCapsText"
+								>
+									<template v-slot:top>
+										<v-text-field
+											v-model="search2"
+											label="Search"
+											class="mx-4"
+										></v-text-field>
+									</template>
+									<template v-slot:item.actions="{ item }">
+										<v-btn
+											elevation="6"
+											style="position:relative;color:white;"
+											@click="sell_vehicle(item)"
+										>
+											Selg
+										</v-btn>
+									</template>
+								</v-data-table>
+							</div>
+							<div class="tab-item"
+								v-if="tab == 'sold'"
+							>
+								<v-data-table
+									:headers="headers3"
+									:items="sold"
+									item-key="id"
+									class="elevation-6"
+									:search="search3"
+									:custom-filter="filterOnlyCapsText"
+								>
+									<template v-slot:top>
+										<v-text-field
+											v-model="search3"
+											label="Search"
+											class="mx-4"
+										></v-text-field>
+									</template>
+								</v-data-table>
+							</div>
+						</div>
+					</div>
+				</transition>
+			</div>
+		</v-app>
+
+        <script>
+			const viewmodel = new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				props:{
+					tabindex:{
+						type: Number,
+						required: false,
+						default: 0
+					}
+				},
+				data: {
+					open: false,
+					open2: false,
+					open3: false,
+					open4: false,
+					open5: false,
+					
+					dropdownOpen: false,
+					dropdownOpen2: false,
+					dropdownOpen3: false,
+					dropdownOpen4: false,
+					dropdownOpen5: false,
+					dropdownOpen6: false,
+
+					topHeader: "",
+					tab: "homepage",
+
+					categories: {},
+					category: {},
+
+					cars: {},
+					showcasecars: {},
+					cataloguecars: {},
+					testdrivecars: {},
+
+					carssearch: "",
+					showcasesearch: "",
+					cataloguesearch: "",
+					testdrivesearch: "",
+					categorysearch: "",
+					search: "",
+					search2: "",
+					search3: "",
+					search4: "",
+
+					car: {},
+					stock: [],
+					orders: [],
+					sold: [],
+					players: [],
+
+					selected: -1,
+					selected2: -1,
+					selected3: -1,
+					selected4: -1,
+					selected5: -1,
+					selected6: -1,
+
+					model: "",
+					label: "",
+					orderprice: "",
+					saleprice: "",
+					description: "",
+					image: "",
+					topspeed: "",
+					horsepower: "",
+					acceleration: "",
+
+					orderAmount: 0,
+					stockAmount: 0,
+					companyMoney: 0,
+					stockValue: 0,
+
+					isJobless: false,
+
+					nf: Intl.NumberFormat(),
+
+					cardealers: [],
+					categories2: [],
+					categories3: [],
+					adminmenucars: [],
+
+					allowdiscount: false,
+
+					items: [
+						{
+							"id":"0",
+							"label":"Metallic Black",
+							"hex":"#0d1116",
+							"rgb":"13, 17, 22"
+						},
+						{
+							"id":"1",
+							"label":"Metallic Graphite Black",
+							"hex":"#1c1d21",
+							"rgb":"28, 29, 33 "
+						},
+						{
+							"id":"2",
+							"label":"Metallic Black Steal",
+							"hex":"#32383d",
+							"rgb":"50, 56, 61 "
+						},
+						{
+							"id":"3",
+							"label":"Metallic Dark Silver",
+							"hex":"#454b4f",
+							"rgb":"69, 75, 79 "
+						},
+						{
+							"id":"4",
+							"label":"Metallic Silver",
+							"hex":"#999da0",
+							"rgb":"153, 157, 160 "
+						},
+						{
+							"id":"5",
+							"label":"Metallic Blue Silver",
+							"hex":"#c2c4c6",
+							"rgb":"194, 196, 198 "
+						},
+						{
+							"id":"6",
+							"label":"Metallic Steel Gray",
+							"hex":"#979a97",
+							"rgb":"151, 154, 151 "
+						},
+						{
+							"id":"7",
+							"label":"Metallic Shadow Silver",
+							"hex":"#637380",
+							"rgb":"99, 115, 128 "
+						},
+						{
+							"id":"8",
+							"label":"Metallic Stone Silver",
+							"hex":"#63625c",
+							"rgb":"99, 98, 92 "
+						},
+						{
+							"id":"9",
+							"label":"Metallic Midnight Silver",
+							"hex":"#3c3f47",
+							"rgb":"60, 63, 71 "
+						},
+						{
+							"id":"10",
+							"label":"Metallic Gun Metal",
+							"hex":"#444e54",
+							"rgb":"68, 78, 84 "
+						},
+						{
+							"id":"11",
+							"label":"Metallic Anthracite Grey",
+							"hex":"#1d2129",
+							"rgb":"29, 33, 41 "
+						},
+						{
+							"id":"12",
+							"label":"Matte Black",
+							"hex":"#13181f",
+							"rgb":"19, 24, 31 "
+						},
+						{
+							"id":"13",
+							"label":"Matte Gray",
+							"hex":"#26282a",
+							"rgb":"38, 40, 42 "
+						},
+						{
+							"id":"14",
+							"label":"Matte Light Grey",
+							"hex":"#515554",
+							"rgb":"81, 85, 84 "
+						},
+						{
+							"id":"15",
+							"label":"Util Black",
+							"hex":"#151921",
+							"rgb":"21, 25, 33 "
+						},
+						{
+							"id":"16",
+							"label":"Util Black Poly",
+							"hex":"#1e2429",
+							"rgb":"30, 36, 41 "
+						},
+						{
+							"id":"17",
+							"label":"Util Dark silver",
+							"hex":"#333a3c",
+							"rgb":"51, 58, 60 "
+						},
+						{
+							"id":"18",
+							"label":"Util Silver",
+							"hex":"#8c9095",
+							"rgb":"140, 144, 149 "
+						},
+						{
+							"id":"19",
+							"label":"Util Gun Metal",
+							"hex":"#39434d",
+							"rgb":"57, 67, 77 "
+						},
+						{
+							"id":"20",
+							"label":"Util Shadow Silver",
+							"hex":"#506272",
+							"rgb":"80, 98, 114 "
+						},
+						{
+							"id":"21",
+							"label":"Worn Black",
+							"hex":"#1e232f",
+							"rgb":"30, 35, 47 "
+						},
+						{
+							"id":"22",
+							"label":"Worn Graphite",
+							"hex":"#363a3f",
+							"rgb":"54, 58, 63 "
+						},
+						{
+							"id":"23",
+							"label":"Worn Silver Grey",
+							"hex":"#a0a199",
+							"rgb":"160, 161, 153 "
+						},
+						{
+							"id":"24",
+							"label":"Worn Silver",
+							"hex":"#d3d3d3",
+							"rgb":"211, 211, 211 "
+						},
+						{
+							"id":"25",
+							"label":"Worn Blue Silver",
+							"hex":"#b7bfca",
+							"rgb":"183, 191, 202 "
+						},
+						{
+							"id":"26",
+							"label":"Worn Shadow Silver",
+							"hex":"#778794",
+							"rgb":"119, 135, 148 "
+						},
+						{
+							"id":"27",
+							"label":"Metallic Red",
+							"hex":"#c00e1a",
+							"rgb":"192, 14, 26 "
+						},
+						{
+							"id":"28",
+							"label":"Metallic Torino Red",
+							"hex":"#da1918",
+							"rgb":"218, 25, 24 "
+						},
+						{
+							"id":"29",
+							"label":"Metallic Formula Red",
+							"hex":"#b6111b",
+							"rgb":"182, 17, 27 "
+						},
+						{
+							"id":"30",
+							"label":"Metallic Blaze Red",
+							"hex":"#a51e23",
+							"rgb":"165, 30, 35 "
+						},
+						{
+							"id":"31",
+							"label":"Metallic Graceful Red",
+							"hex":"#7b1a22",
+							"rgb":"123, 26, 34 "
+						},
+						{
+							"id":"32",
+							"label":"Metallic Garnet Red",
+							"hex":"#8e1b1f",
+							"rgb":"142, 27, 31 "
+						},
+						{
+							"id":"33",
+							"label":"Metallic Desert Red",
+							"hex":"#6f1818",
+							"rgb":"111, 24, 24 "
+						},
+						{
+							"id":"34",
+							"label":"Metallic Cabernet Red",
+							"hex":"#49111d",
+							"rgb":"73, 17, 29 "
+						},
+						{
+							"id":"35",
+							"label":"Metallic Candy Red",
+							"hex":"#b60f25",
+							"rgb":"182, 15, 37 "
+						},
+						{
+							"id":"36",
+							"label":"Metallic Sunrise Orange",
+							"hex":"#d44a17",
+							"rgb":"212, 74, 23 "
+						},
+						{
+							"id":"37",
+							"label":"Metallic Classic Gold",
+							"hex":"#c2944f",
+							"rgb":"194, 148, 79 "
+						},
+						{
+							"id":"38",
+							"label":"Metallic Orange",
+							"hex":"#f78616",
+							"rgb":"247, 134, 22 "
+						},
+						{
+							"id":"39",
+							"label":"Matte Red",
+							"hex":"#cf1f21",
+							"rgb":"207, 31, 33 "
+						},
+						{
+							"id":"40",
+							"label":"Matte Dark Red",
+							"hex":"#732021",
+							"rgb":"115, 32, 33 "
+						},
+						{
+							"id":"41",
+							"label":"Matte Orange",
+							"hex":"#f27d20",
+							"rgb":"242, 125, 32 "
+						},
+						{
+							"id":"42",
+							"label":"Matte Yellow",
+							"hex":"#ffc91f",
+							"rgb":"255, 201, 31 "
+						},
+						{
+							"id":"43",
+							"label":"Util Red",
+							"hex":"#9c1016",
+							"rgb":"156, 16, 22 "
+						},
+						{
+							"id":"44",
+							"label":"Util Bright Red",
+							"hex":"#de0f18",
+							"rgb":"222, 15, 24 "
+						},
+						{
+							"id":"45",
+							"label":"Util Garnet Red",
+							"hex":"#8f1e17",
+							"rgb":"143, 30, 23 "
+						},
+						{
+							"id":"46",
+							"label":"Worn Red",
+							"hex":"#a94744",
+							"rgb":"169, 71, 68 "
+						},
+						{
+							"id":"47",
+							"label":"Worn Golden Red",
+							"hex":"#b16c51",
+							"rgb":"177, 108, 81 "
+						},
+						{
+							"id":"48",
+							"label":"Worn Dark Red",
+							"hex":"#371c25",
+							"rgb":"55, 28, 37 "
+						},
+						{
+							"id":"49",
+							"label":"Metallic Dark Green",
+							"hex":"#132428",
+							"rgb":"19, 36, 40 "
+						},
+						{
+							"id":"50",
+							"label":"Metallic Racing Green",
+							"hex":"#122e2b",
+							"rgb":"18, 46, 43 "
+						},
+						{
+							"id":"51",
+							"label":"Metallic Sea Green",
+							"hex":"#12383c",
+							"rgb":"18, 56, 60 "
+						},
+						{
+							"id":"52",
+							"label":"Metallic Olive Green",
+							"hex":"#31423f",
+							"rgb":"49, 66, 63 "
+						},
+						{
+							"id":"53",
+							"label":"Metallic Green",
+							"hex":"#155c2d",
+							"rgb":"21, 92, 45 "
+						},
+						{
+							"id":"54",
+							"label":"Metallic Gasoline Blue Green",
+							"hex":"#1b6770",
+							"rgb":"27, 103, 112 "
+						},
+						{
+							"id":"55",
+							"label":"Matte Lime Green",
+							"hex":"#66b81f",
+							"rgb":"102, 184, 31 "
+						},
+						{
+							"id":"56",
+							"label":"Util Dark Green",
+							"hex":"#22383e",
+							"rgb":"34, 56, 62 "
+						},
+						{
+							"id":"57",
+							"label":"Util Green",
+							"hex":"#1d5a3f",
+							"rgb":"29, 90, 63 "
+						},
+						{
+							"id":"58",
+							"label":"Worn Dark Green",
+							"hex":"#2d423f",
+							"rgb":"45, 66, 63 "
+						},
+						{
+							"id":"59",
+							"label":"Worn Green",
+							"hex":"#45594b",
+							"rgb":"69, 89, 75 "
+						},
+						{
+							"id":"60",
+							"label":"Worn Sea Wash",
+							"hex":"#65867f",
+							"rgb":"101, 134, 127 "
+						},
+						{
+							"id":"61",
+							"label":"Metallic Midnight Blue",
+							"hex":"#222e46",
+							"rgb":"34, 46, 70 "
+						},
+						{
+							"id":"62",
+							"label":"Metallic Dark Blue",
+							"hex":"#233155",
+							"rgb":"35, 49, 85 "
+						},
+						{
+							"id":"63",
+							"label":"Metallic Saxony Blue",
+							"hex":"#304c7e",
+							"rgb":"48, 76, 126 "
+						},
+						{
+							"id":"64",
+							"label":"Metallic Blue",
+							"hex":"#47578f",
+							"rgb":"71, 87, 143 "
+						},
+						{
+							"id":"65",
+							"label":"Metallic Mariner Blue",
+							"hex":"#637ba7",
+							"rgb":"99, 123, 167 "
+						},
+						{
+							"id":"66",
+							"label":"Metallic Harbor Blue",
+							"hex":"#394762",
+							"rgb":"57, 71, 98 "
+						},
+						{
+							"id":"67",
+							"label":"Metallic Diamond Blue",
+							"hex":"#d6e7f1",
+							"rgb":"214, 231, 241 "
+						},
+						{
+							"id":"68",
+							"label":"Metallic Surf Blue",
+							"hex":"#76afbe",
+							"rgb":"118, 175, 190 "
+						},
+						{
+							"id":"69",
+							"label":"Metallic Nautical Blue",
+							"hex":"#345e72",
+							"rgb":"52, 94, 114 "
+						},
+						{
+							"id":"70",
+							"label":"Metallic Bright Blue",
+							"hex":"#0b9cf1",
+							"rgb":"11, 156, 241 "
+						},
+						{
+							"id":"71",
+							"label":"Metallic Purple Blue",
+							"hex":"#2f2d52",
+							"rgb":"47, 45, 82 "
+						},
+						{
+							"id":"72",
+							"label":"Metallic Spinnaker Blue",
+							"hex":"#282c4d",
+							"rgb":"40, 44, 77 "
+						},
+						{
+							"id":"73",
+							"label":"Metallic Ultra Blue",
+							"hex":"#2354a1",
+							"rgb":"35, 84, 161 "
+						},
+						{
+							"id":"74",
+							"label":"Metallic Bright Blue",
+							"hex":"#6ea3c6",
+							"rgb":"110, 163, 198 "
+						},
+						{
+							"id":"75",
+							"label":"Util Dark Blue",
+							"hex":"#112552",
+							"rgb":"17, 37, 82 "
+						},
+						{
+							"id":"76",
+							"label":"Util Midnight Blue",
+							"hex":"#1b203e",
+							"rgb":"27, 32, 62 "
+						},
+						{
+							"id":"77",
+							"label":"Util Blue",
+							"hex":"#275190",
+							"rgb":"39, 81, 144 "
+						},
+						{
+							"id":"78",
+							"label":"Util Sea Foam Blue",
+							"hex":"#608592",
+							"rgb":"96, 133, 146 "
+						},
+						{
+							"id":"79",
+							"label":"Util Lightning blue",
+							"hex":"#2446a8",
+							"rgb":"36, 70, 168 "
+						},
+						{
+							"id":"80",
+							"label":"Util Maui Blue Poly",
+							"hex":"#4271e1",
+							"rgb":"66, 113, 225 "
+						},
+						{
+							"id":"81",
+							"label":"Util Bright Blue",
+							"hex":"#3b39e0",
+							"rgb":"59, 57, 224 "
+						},
+						{
+							"id":"82",
+							"label":"Matte Dark Blue",
+							"hex":"#1f2852",
+							"rgb":"31, 40, 82 "
+						},
+						{
+							"id":"83",
+							"label":"Matte Blue",
+							"hex":"#253aa7",
+							"rgb":"37, 58, 167 "
+						},
+						{
+							"id":"84",
+							"label":"Matte Midnight Blue",
+							"hex":"#1c3551",
+							"rgb":"28, 53, 81 "
+						},
+						{
+							"id":"85",
+							"label":"Worn Dark blue",
+							"hex":"#4c5f81",
+							"rgb":"76, 95, 129 "
+						},
+						{
+							"id":"86",
+							"label":"Worn Blue",
+							"hex":"#58688e",
+							"rgb":"88, 104, 142 "
+						},
+						{
+							"id":"87",
+							"label":"Worn Light blue",
+							"hex":"#74b5d8",
+							"rgb":"116, 181, 216 "
+						},
+						{
+							"id":"88",
+							"label":"Metallic Taxi Yellow",
+							"hex":"#ffcf20",
+							"rgb":"255, 207, 32 "
+						},
+						{
+							"id":"89",
+							"label":"Metallic Race Yellow",
+							"hex":"#fbe212",
+							"rgb":"251, 226, 18 "
+						},
+						{
+							"id":"90",
+							"label":"Metallic Bronze",
+							"hex":"#916532",
+							"rgb":"145, 101, 50 "
+						},
+						{
+							"id":"91",
+							"label":"Metallic Yellow Bird",
+							"hex":"#e0e13d",
+							"rgb":"224, 225, 61 "
+						},
+						{
+							"id":"92",
+							"label":"Metallic Lime",
+							"hex":"#98d223",
+							"rgb":"152, 210, 35 "
+						},
+						{
+							"id":"93",
+							"label":"Metallic Champagne",
+							"hex":"#9b8c78",
+							"rgb":"155, 140, 120 "
+						},
+						{
+							"id":"94",
+							"label":"Metallic Pueblo Beige",
+							"hex":"#503218",
+							"rgb":"80, 50, 24 "
+						},
+						{
+							"id":"95",
+							"label":"Metallic Dark Ivory",
+							"hex":"#473f2b",
+							"rgb":"71, 63, 43 "
+						},
+						{
+							"id":"96",
+							"label":"Metallic Choco Brown",
+							"hex":"#221b19",
+							"rgb":"34, 27, 25 "
+						},
+						{
+							"id":"97",
+							"label":"Metallic Golden Brown",
+							"hex":"#653f23",
+							"rgb":"101, 63, 35 "
+						},
+						{
+							"id":"98",
+							"label":"Metallic Light Brown",
+							"hex":"#775c3e",
+							"rgb":"119, 92, 62 "
+						},
+						{
+							"id":"99",
+							"label":"Metallic Straw Beige",
+							"hex":"#ac9975",
+							"rgb":"172, 153, 117 "
+						},
+						{
+							"id":"100",
+							"label":"Metallic Moss Brown",
+							"hex":"#6c6b4b",
+							"rgb":"108, 107, 75 "
+						},
+						{
+							"id":"101",
+							"label":"Metallic Biston Brown",
+							"hex":"#402e2b",
+							"rgb":"64, 46, 43 "
+						},
+						{
+							"id":"102",
+							"label":"Metallic Beechwood",
+							"hex":"#a4965f",
+							"rgb":"164, 150, 95 "
+						},
+						{
+							"id":"103",
+							"label":"Metallic Dark Beechwood",
+							"hex":"#46231a",
+							"rgb":"70, 35, 26 "
+						},
+						{
+							"id":"104",
+							"label":"Metallic Choco Orange",
+							"hex":"#752b19",
+							"rgb":"117, 43, 25 "
+						},
+						{
+							"id":"105",
+							"label":"Metallic Beach Sand",
+							"hex":"#bfae7b",
+							"rgb":"191, 174, 123 "
+						},
+						{
+							"id":"106",
+							"label":"Metallic Sun Bleeched Sand",
+							"hex":"#dfd5b2",
+							"rgb":"223, 213, 178 "
+						},
+						{
+							"id":"107",
+							"label":"Metallic Cream",
+							"hex":"#f7edd5",
+							"rgb":"247, 237, 213 "
+						},
+						{
+							"id":"108",
+							"label":"Util Brown",
+							"hex":"#3a2a1b",
+							"rgb":"58, 42, 27 "
+						},
+						{
+							"id":"109",
+							"label":"Util Medium Brown",
+							"hex":"#785f33",
+							"rgb":"120, 95, 51 "
+						},
+						{
+							"id":"110",
+							"label":"Util Light Brown",
+							"hex":"#b5a079",
+							"rgb":"181, 160, 121 "
+						},
+						{
+							"id":"111",
+							"label":"Metallic White",
+							"hex":"#fffff6",
+							"rgb":"255, 255, 246 "
+						},
+						{
+							"id":"112",
+							"label":"Metallic Frost White",
+							"hex":"#eaeaea",
+							"rgb":"234, 234, 234 "
+						},
+						{
+							"id":"113",
+							"label":"Worn Honey Beige",
+							"hex":"#b0ab94",
+							"rgb":"176, 171, 148 "
+						},
+						{
+							"id":"114",
+							"label":"Worn Brown",
+							"hex":"#453831",
+							"rgb":"69, 56, 49 "
+						},
+						{
+							"id":"115",
+							"label":"Worn Dark Brown",
+							"hex":"#2a282b",
+							"rgb":"42, 40, 43 "
+						},
+						{
+							"id":"116",
+							"label":"Worn straw beige",
+							"hex":"#726c57",
+							"rgb":"114, 108, 87 "
+						},
+						{
+							"id":"117",
+							"label":"Brushed Steel",
+							"hex":"#6a747c",
+							"rgb":"106, 116, 124 "
+						},
+						{
+							"id":"118",
+							"label":"Brushed Black steel",
+							"hex":"#354158",
+							"rgb":"53, 65, 88 "
+						},
+						{
+							"id":"119",
+							"label":"Brushed Aluminium",
+							"hex":"#9ba0a8",
+							"rgb":"155, 160, 168 "
+						},
+						{
+							"id":"120",
+							"label":"Chrome",
+							"hex":"#5870a1",
+							"rgb":"88, 112, 161 "
+						},
+						{
+							"id":"121",
+							"label":"Worn Off White",
+							"hex":"#eae6de",
+							"rgb":"234, 230, 222 "
+						},
+						{
+							"id":"122",
+							"label":"Util Off White",
+							"hex":"#dfddd0",
+							"rgb":"223, 221, 208 "
+						},
+						{
+							"id":"123",
+							"label":"Worn Orange",
+							"hex":"#f2ad2e",
+							"rgb":"242, 173, 46 "
+						},
+						{
+							"id":"124",
+							"label":"Worn Light Orange",
+							"hex":"#f9a458",
+							"rgb":"249, 164, 88 "
+						},
+						{
+							"id":"125",
+							"label":"Metallic Securicor Green",
+							"hex":"#83c566",
+							"rgb":"131, 197, 102 "
+						},
+						{
+							"id":"126",
+							"label":"Worn Taxi Yellow",
+							"hex":"#f1cc40",
+							"rgb":"241, 204, 64 "
+						},
+						{
+							"id":"127",
+							"label":"police car blue",
+							"hex":"#4cc3da",
+							"rgb":"76, 195, 218 "
+						},
+						{
+							"id":"128",
+							"label":"Matte Green",
+							"hex":"#4e6443",
+							"rgb":"78, 100, 67 "
+						},
+						{
+							"id":"129",
+							"label":"Matte Brown",
+							"hex":"#bcac8f",
+							"rgb":"188, 172, 143 "
+						},
+						{
+							"id":"130",
+							"label":"Worn Orange",
+							"hex":"#f8b658",
+							"rgb":"248, 182, 88 "
+						},
+						{
+							"id":"131",
+							"label":"Matte White",
+							"hex":"#fcf9f1",
+							"rgb":"252, 249, 241 "
+						},
+						{
+							"id":"132",
+							"label":"Worn White",
+							"hex":"#fffffb",
+							"rgb":"255, 255, 251 "
+						},
+						{
+							"id":"133",
+							"label":"Worn Olive Army Green",
+							"hex":"#81844c",
+							"rgb":"129, 132, 76 "
+						},
+						{
+							"id":"134",
+							"label":"Pure White",
+							"hex":"#ffffff",
+							"rgb":"255, 255, 255 "
+						},
+						{
+							"id":"135",
+							"label":"Hot Pink",
+							"hex":"#f21f99",
+							"rgb":"242, 31, 153 "
+						},
+						{
+							"id":"136",
+							"label":"Salmon pink",
+							"hex":"#fdd6cd",
+							"rgb":"253, 214, 205 "
+						},
+						{
+							"id":"137",
+							"label":"Metallic Vermillion Pink",
+							"hex":"#df5891",
+							"rgb":"223, 88, 145 "
+						},
+						{
+							"id":"138",
+							"label":"Orange",
+							"hex":"#f6ae20",
+							"rgb":"246, 174, 32 "
+						},
+						{
+							"id":"139",
+							"label":"Green",
+							"hex":"#b0ee6e",
+							"rgb":"176, 238, 110 "
+						},
+						{
+							"id":"140",
+							"label":"Blue",
+							"hex":"#08e9fa",
+							"rgb":"8, 233, 250 "
+						},
+						{
+							"id":"141",
+							"label":"Mettalic Black Blue",
+							"hex":"#0a0c17",
+							"rgb":"10, 12, 23 "
+						},
+						{
+							"id":"142",
+							"label":"Metallic Black Purple",
+							"hex":"#0c0d18",
+							"rgb":"12, 13, 24 "
+						},
+						{
+							"id":"143",
+							"label":"Metallic Black Red",
+							"hex":"#0e0d14",
+							"rgb":"14, 13, 20 "
+						},
+						{
+							"id":"144",
+							"label":"hunter green",
+							"hex":"#9f9e8a",
+							"rgb":"159, 158, 138 "
+						},
+						{
+							"id":"145",
+							"label":"Metallic Purple",
+							"hex":"#621276",
+							"rgb":"98, 18, 118 "
+						},
+						{
+							"id":"146",
+							"label":"Metaillic V Dark Blue",
+							"hex":"#0b1421",
+							"rgb":"11, 20, 33 "
+						},
+						{
+							"id":"147",
+							"label":"MODSHOP BLACK1",
+							"hex":"#11141a",
+							"rgb":"17, 20, 26 "
+						},
+						{
+							"id":"148",
+							"label":"Matte Purple",
+							"hex":"#6b1f7b",
+							"rgb":"107, 31, 123 "
+						},
+						{
+							"id":"149",
+							"label":"Matte Dark Purple",
+							"hex":"#1e1d22",
+							"rgb":"30, 29, 34 "
+						},
+						{
+							"id":"150",
+							"label":"Metallic Lava Red",
+							"hex":"#bc1917",
+							"rgb":"188, 25, 23 "
+						},
+						{
+							"id":"151",
+							"label":"Matte Forest Green",
+							"hex":"#2d362a",
+							"rgb":"45, 54, 42 "
+						},
+						{
+							"id":"152",
+							"label":"Matte Olive Drab",
+							"hex":"#696748",
+							"rgb":"105, 103, 72 "
+						},
+						{
+							"id":"153",
+							"label":"Matte Desert Brown",
+							"hex":"#7a6c55",
+							"rgb":"122, 108, 85 "
+						},
+						{
+							"id":"154",
+							"label":"Matte Desert Tan",
+							"hex":"#c3b492",
+							"rgb":"195, 180, 146 "
+						},
+						{
+							"id":"155",
+							"label":"Matte Foilage Green",
+							"hex":"#5a6352",
+							"rgb":"90, 99, 82 "
+						},
+						{
+							"id":"156",
+							"label":"DEFAULT ALLOY COLOR",
+							"hex":"#81827f",
+							"rgb":"129, 130, 127 "
+						},
+						{
+							"id":"157",
+							"label":"Epsilon Blue",
+							"hex":"#afd6e4",
+							"rgb":"175, 214, 228 "
+						},
+						{
+							"id":"158",
+							"label":"Pure Gold",
+							"hex":"#7a6440",
+							"rgb":"122, 100, 64 "
+						},
+						{
+							"id":"159",
+							"label":"Brushed Gold",
+							"hex":"#7f6a48",
+							"rgb":"127, 106, 72 "
+						}
+					]
+				},
+				methods: {
+					filterOnlyCapsText (value, search, item) {
+						return value != null &&
+						search != null &&
+						typeof value === 'string' &&
+						value.toString().toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) !== -1
+					},
+
+					async sell_vehicle(vehicle) {
+						const { value: source } = await Notifications.fire({
+							title: 'Er du sikker?',
+							text: `Vil du selge bilen for kr${this.nf.format(vehicle.saleprice)}.\nVelg personen du skal selge til`,
+							input: 'select',
+							inputOptions: viewmodel.players,
+							inputPlaceholder: 'Velg person',
+							showCancelButton: true,
+						})
+
+						if (source) {
+							if (viewmodel.allowdiscount == true) {
+								Notifications.fire({
+									title: 'Rabattert pris?',
+									text: `Do you want to sell this vehicle at a discounted price?`,
+									showCancelButton: true,
+								}).then(async (result) => {
+									if (result.isConfirmed == true) {
+										const { value: price } = await Notifications.fire({
+											title: 'Choose a discounted price',
+											text: `Choose a discounted price to sell the car for. The price has to be between $${this.nf.format(vehicle.orderprice)}-$${this.nf.format(vehicle.saleprice)}.`,
+											input: 'number',
+											inputPlaceholder: 'Discounted price',
+											showCancelButton: true,
+										})
+
+										if (price) {
+											if (price >= vehicle.orderprice && price <= vehicle.saleprice) {
+												Notifications.fire({
+													title: "Kjøretøy solgt",
+													text: `Du prøver å selge til: ${this.players[source]} for kr${this.nf.format(price)}.`
+												})
+												$.post("https://zerio-cardealer/sellvehicle", JSON.stringify({
+													vehicleData: vehicle,
+													targetCitizenId: source,
+													discount: price
+												}))
+											}
+											else {
+												Notifications.fire({
+													title: "Ugyldig pris",
+													text: `Prisen må være mellom kr${this.nf.format(vehicle.orderprice)}-kr${this.nf.format(vehicle.saleprice)}.`
+												})
+											}
+										}
+										else {
+											Notifications.fire({
+												title: "Kjøretøy er solgt",
+												text: `Du prøver å selge kjøretøy til: ${this.players[source]} for kr${this.nf.format(vehicle.saleprice)}.`
+											})
+											$.post("https://zerio-cardealer/sellvehicle", JSON.stringify({
+												vehicleData: vehicle,
+												targetCitizenId: source,
+												discount: undefined
+											}))
+										}
+									}
+									else {
+										Notifications.fire({
+											title: "Kjøretøy solgt",
+											text: `Du prøver å selge kjøretøy til: ${this.players[source]} for kr${this.nf.format(vehicle.saleprice)}.`
+										})
+										$.post("https://zerio-cardealer/sellvehicle", JSON.stringify({
+											vehicleData: vehicle,
+											targetCitizenId: source,
+											discount: undefined
+										}))
+									}
+								})
+							}
+							else {
+								Notifications.fire({
+									title: "Kjøretøy er solgt",
+									text: `Du prøver å selge kjøretøy til: ${this.players[source]} for kr${this.nf.format(vehicle.saleprice)}.`
+								})
+								$.post("https://zerio-cardealer/sellvehicle", JSON.stringify({
+									vehicleData: vehicle,
+									targetCitizenId: source,
+									discount: undefined
+								}))
+							}
+						}
+					},
+
+					collect_vehicle(vehicle) {
+						$.post("https://zerio-cardealer/collectvehicle", JSON.stringify({
+							vehicleData: vehicle
+						}))
+					},
+
+					load_addvehicle() {
+						$.post("https://zerio-cardealer/getcardealers", JSON.stringify({}), function(result) {
+							viewmodel.cardealers = result.cardealers
+							viewmodel.categories2 = result.categories
+						})
+					},
+
+					load_removevehicle() {
+						$.post("https://zerio-cardealer/getcardealers", JSON.stringify({}), function(result) {
+							viewmodel.cardealers = result.cardealers
+							viewmodel.adminmenucars = result.cars
+						})
+					},
+
+					async testdrive_car(car) {
+						if (viewmodel.isJobless == false) {
+							const { value: source } = await Notifications.fire({
+								title: 'Er du sikker?',
+								text: `Vil du tillate denne personen å prøvekjøre.\nVelg personen som skal prøvekjøre`,
+								input: 'select',
+								inputOptions: viewmodel.players,
+								inputPlaceholder: 'Velg spiller',
+								showCancelButton: true,
+							})
+
+							if (source) {
+								$.post("https://zerio-cardealer/testdrivevehicle", JSON.stringify({
+									vehicleData: car,
+									targetCitizenId: source
+								}))
+
+								$(".main5").animate({
+									top: "-50%"
+								}, 250)
+								setTimeout(function() {
+									$.post(`https://zerio-cardealer/Close`)
+									viewmodel.open = false
+									viewmodel.open2 = false
+								}, 250)
+							}
+						}
+						else {
+							$.post("https://zerio-cardealer/testdrivevehicle", JSON.stringify({
+								vehicleData: car
+							}))
+
+							$(".main5").animate({
+								top: "-50%"
+							}, 250)
+							setTimeout(function() {
+								$.post(`https://zerio-cardealer/Close`)
+								viewmodel.open = false
+								viewmodel.open2 = false
+							}, 250)
+						}
+					},
+
+					remove_showcase_car() {
+						$.post("https://zerio-cardealer/removeshowcasevehicle", JSON.stringify({}))
+					},
+
+					showcase_car(car) {
+						if (viewmodel.selected3 == -1 || viewmodel.selected4 == -1) {
+							Notifications.fire({
+								title: 'Ingen farge valgt',
+								text: 'Du må velge farge!',
+								icon: 'error',
+					
+								target: ".main2"
+							})
+						}
+						else {
+							$(".main2").animate({
+								top: "-50%"
+							}, 250)
+							setTimeout(function() {
+								$.post(`https://zerio-cardealer/Close`)
+								viewmodel.open = false
+								viewmodel.open2 = false
+							}, 250)
+
+                            car.color1 = this.selected3
+                            car.color2 = this.selected4
+
+							$.post("https://zerio-cardealer/showcasevehicle", JSON.stringify({
+								vehicle: car
+							}))
+						}
+					},
+
+					set_tab(newValue) {
+						this.tab = newValue
+					},
+
+					change_tab(newTab) {
+						$("." + newTab).click();
+					},
+
+					order_jobless_vehicle(car) {
+						Notifications.fire({
+							title: 'Er du sikker?',
+							text: `Vil du bestille ${car.label} for kr${this.nf.format(car.orderprice)}?\nVelg farge, når du bestiller kan det ikke reverseres.`,
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Ja!',
+							target: ".main"
+						}).then((result) => {
+							if (result.isConfirmed) {
+								if (this.selected == -1 || this.selected2 == -1) {
+									Notifications.fire({
+										title: 'Ingen farge valgt',
+										text: 'Du må velge farge!',
+										icon: 'error',
+							
+										target: ".main"
+									})
+								}
+								else {
+									car.color1 = this.selected
+									car.color2 = this.selected2
+									$.post("https://zerio-cardealer/orderjoblessvehicle", JSON.stringify({
+										vehicle: car,
+										colorlabel: viewmodel.items[Number(this.selected)].label + ", " + viewmodel.items[Number(this.selected2)].label
+									}), function(result) {
+										var nf = Intl.NumberFormat();
+										if (result.status == false && result.msg == "poor") {
+											Notifications.fire({
+												title: 'Ikke nok penger',
+												text: `Du har ikke nok penger! Du har kr${nf.format(result.money)}, kjøretøyet koster kr${nf.format(car.orderprice)}. Du mangler kr${nf.format(car.orderprice - result.money)}`,
+												icon: 'error',
+									
+												target: ".main"
+											})
+										}
+										else if (result.status == true) {
+											Notifications.fire({
+												title: 'Kjøretøy bestilt!',
+												text: `Du har bestilt kjøretøy, det blir tilgjengelig snart. Estimert ventetid er ${result.ordertime}!`,
+												icon: 'success',
+									
+												target: ".main"
+											})
+											viewmodel.change_tab("orders")
+											viewmodel.load_orders()
+										}
+									})
+								}
+							}
+						})
+					},
+
+					remove_vehicle(data) {
+						Notifications.fire({
+							title: 'Er du sikker?',
+							text: `Vil du slette kjøretøyet kalt "${data.label}" fra ${data.cardealer} jobb.`,
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes!',
+							target: ".main4"
+						}).then((result) => {
+							if (result.isConfirmed) {
+								$.post("https://zerio-cardealer/removevehicle", JSON.stringify({
+									vehicle: data
+								}))
+							}
+						})
+					},
+
+					add_vehicle() {
+						if (viewmodel.selected5 !== -1 && viewmodel.selected6 !== -1) {
+							var selectedJob = viewmodel.cardealers[viewmodel.selected5]
+							var selectedCategory = viewmodel.categories3[viewmodel.selected6]
+							var model = viewmodel.model
+							var label = viewmodel.label
+							var orderprice = viewmodel.orderprice
+							var saleprice = viewmodel.saleprice
+							var description = viewmodel.description
+							var image = viewmodel.image
+							var topspeed = viewmodel.topspeed
+							var horsepower = viewmodel.horsepower
+							var acceleration = viewmodel.acceleration
+
+							if (model !== "" && label !== "" && "orderprice" !== "" && saleprice !== "" && description !== "" && image !== "" && topspeed !== "" && horsepower !== "" && acceleration !== "") {
+								$.post("https://zerio-cardealer/addvehicle", JSON.stringify({
+									job: selectedJob, category: selectedCategory,
+									model: model, label: label,
+									orderprice: orderprice, saleprice: saleprice,
+									description: description, 
+									image: image,
+									topspeed: topspeed, horsepower: horsepower, acceleration: acceleration
+								}))
+							}
+							else {
+								Notifications.fire({
+									title: 'ugyldig beløp',
+									text: 'Please input / select values for everything!',
+									icon: 'error',
+						
+									target: ".main4"
+								})
+							}
+						}
+						else {
+							Notifications.fire({
+								title: 'Invalid values',
+								text: 'Please input / select values for everything!',
+								icon: 'error',
+					
+								target: ".main4"
+							})
+						}
+					},
+
+					order_vehicle(car) {
+						Notifications.fire({
+							title: 'Er du sikker?',
+							text: `Sikker på at du vil kjøpe ${car.label} for kr${this.nf.format(car.orderprice)}?\nKjøpet kan ikke reverseres. husk å velg riktige farger.`,
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes!',
+							target: ".main"
+						}).then((result) => {
+							if (result.isConfirmed) {
+								if (this.selected == -1 || this.selected2 == -1) {
+									Notifications.fire({
+										title: 'Ingen farger valgt',
+										text: 'Du må velge farge!',
+										icon: 'error',
+							
+										target: ".main"
+									})
+								}
+								else {
+									car.color1 = this.selected
+									car.color2 = this.selected2
+									$.post("https://zerio-cardealer/ordervehicle", JSON.stringify({
+										vehicle: car,
+										colorlabel: viewmodel.items[Number(this.selected)].label + ", " + viewmodel.items[Number(this.selected2)].label
+									}), function(result) {
+										var nf = Intl.NumberFormat();
+										if (result.status == false && result.msg == "poor") {
+											Notifications.fire({
+												title: 'Ikke nok penger',
+												text: `Du har ikke nok penger! You have kr${nf.format(result.money)}, bilen koster kr${nf.format(car.orderprice)}. Du mangler kr${nf.format(car.orderprice - result.money)}`,
+												icon: 'error',
+									
+												target: ".main"
+											})
+										}
+										else if (result.status == true) {
+											Notifications.fire({
+												title: 'Ordered Vehicle!',
+												text: `You successfully ordered this vehicle, it will be available under the orders tab. The estimated order time is ${result.ordertime}!`,
+												icon: 'success',
+									
+												target: ".main"
+											})
+											viewmodel.change_tab("orders")
+											viewmodel.load_orders()
+										}
+									})
+								}
+							}
+						})
+					},
+
+					view_vehicles(category) {
+						if (category.cars.length == 0) {
+							Notifications.fire({
+								title: 'Empty category',
+								text: 'This category doesn\'t contain any cars!',
+								icon: 'error',
+					
+								target: ".main"
+							})
+						}
+						else {
+							viewmodel.cars = category.cars
+							viewmodel.category = category
+							viewmodel.tab = "vehicles"
+						}
+					},
+
+					view_vehicle(vehicle) {
+						viewmodel.car = vehicle
+						viewmodel.tab = "vehicle"
+					},
+
+					load_orders() {
+						$.post("https://zerio-cardealer/getorders", JSON.stringify({}), function(result) {
+							var nf = Intl.NumberFormat();
+							for (i = 0; i < result.length; i++) {
+								result[i].pricelabel = "kr" + nf.format(result[i].orderprice)
+							}
+							viewmodel.orders = result
+						})
+					},
+
+					load_stock() {
+						$.post("https://zerio-cardealer/getstock", JSON.stringify({}), function(result) {
+							var nf = Intl.NumberFormat();
+							for (i = 0; i < result.stock.length; i++) {
+								result.stock[i].pricelabel = "kr" + nf.format(result.stock[i].orderprice)
+								result.stock[i].pricelabel2 = "kr" + nf.format(result.stock[i].saleprice)
+							}
+							viewmodel.stock = result.stock
+							viewmodel.players = result.players
+						})
+					},
+
+					load_sold() {
+						$.post("https://zerio-cardealer/getsold", JSON.stringify({}), function(result) {
+							var nf = Intl.NumberFormat();
+							for (i = 0; i < result.sold.length; i++) {
+								result.sold[i].pricelabel = "kr" + nf.format(result.sold[i].orderprice)
+								result.sold[i].pricelabel2 = "kr" + nf.format(result.sold[i].saleprice)
+							}
+							viewmodel.sold = result.sold
+						})
+					},
+
+					load_homepage() {
+						$.post("https://zerio-cardealer/gethomepagedata", JSON.stringify({}), function(result) {
+							viewmodel.orderAmount = result.orderAmount
+							viewmodel.stockAmount = result.stockAmount
+							viewmodel.companyMoney = result.companyMoney
+							viewmodel.stockValue = result.stockValue
+						})
+					}
+				},
+				computed: {
+					searching () {
+						if (!this.categorysearch) return this.categories
+
+						const search = this.categorysearch.toLowerCase()
+						return this.categories.filter(item => {
+						const text = item.label.toLowerCase()
+
+						return text.indexOf(search) > -1
+						})
+					},
+					searching2 () {
+						if (!this.carssearch) return this.cars
+
+						const search = this.carssearch.toLowerCase()
+						return this.cars.filter(item => {
+						const text = item.label.toLowerCase()
+
+						return text.indexOf(search) > -1
+						})
+					},
+					searching3 () {
+						if (!this.showcasesearch) return this.showcasecars.stock
+
+						const search = this.showcasesearch.toLowerCase()
+						return this.showcasecars.stock.filter(item => {
+							const text = item.model.toLowerCase()
+
+							return text.indexOf(search) > -1
+						})
+					},
+					searching4 () {
+						if (!this.cataloguesearch) return this.cataloguecars
+
+						const search = this.cataloguesearch.toLowerCase()
+						return this.cataloguecars.filter(item => {
+							const text = item.model.toLowerCase()
+
+							return text.indexOf(search) > -1
+						})
+					},
+					searching5 () {
+						if (!this.testdrivesearch) return this.testdrivecars
+
+						const search = this.testdrivesearch.toLowerCase()
+						return this.testdrivecars.filter(item => {
+							const text = item.model.toLowerCase()
+
+							return text.indexOf(search) > -1
+						})
+					},
+					headers () {
+						return [
+							{
+								text: 'Model',
+								align: 'start',
+								value: 'model',
+							},
+							{
+								text: 'Order Date',
+								value: 'date',
+							},
+							{
+								text: 'Time Left',
+								value: 'timeleft',
+							},
+							{
+								text: 'Colors',
+								value: "colorlabel",
+							},
+							{
+								text: 'Order Price',
+								value: 'pricelabel',
+							},
+							{
+								text: 'Ordered By',
+								value: 'orderedby',
+							},
+						]
+					},
+					headers4 () {
+						return [
+							{
+								text: 'Model',
+								align: 'start',
+								value: 'model',
+							},
+							{
+								text: 'Order Date',
+								value: 'date',
+							},
+							{
+								text: 'Time Left',
+								value: 'timeleft',
+							},
+							{
+								text: 'Colors',
+								value: "colorlabel",
+							},
+							{
+								text: 'Order Price',
+								value: 'pricelabel',
+							},
+							{
+								text: 'Ordered By',
+								value: 'orderedby',
+							},
+							{
+								text: "Actions",
+								value : 'actions'
+							}
+						]
+					},
+					headers5 () {
+						return [
+							{
+								text: 'Model',
+								align: 'start',
+								value: 'model',
+							},
+							{
+								text: 'Label',
+								value: 'label',
+							},
+							{
+								text: 'Order Price',
+								value: 'orderprice',
+							},
+							{
+								text: 'Sale Price',
+								value: "saleprice",
+							},
+							{
+								text: 'Job',
+								value: 'cardealer',
+							},
+							{
+								text: 'Category',
+								value: 'category',
+							},
+							{
+								text: "Actions",
+								value : 'actions'
+							}
+						]
+					},
+					headers2 () {
+						return [
+							{
+								text: 'Model',
+								align: 'start',
+								value: 'model',
+							},
+							{
+								text: 'Order Date',
+								value: 'date',
+							},
+							{
+								text: 'Colors',
+								value: "colorlabel",
+							},
+							{
+								text: 'Order Price',
+								value: 'pricelabel',
+							},
+							{
+								text: 'Sale Price',
+								value: 'pricelabel2',
+							},
+							{
+								text: 'Ordered By',
+								value: 'orderedby',
+							},
+							{
+								text: "Actions",
+								value : 'actions'
+							}
+						]
+					},
+					headers3 () {
+						return [
+							{
+								text: 'Model',
+								align: 'start',
+								value: 'model',
+							},
+							{
+								text: 'Order Date',
+								value: 'date',
+							},
+							{
+								text: 'Sale Date',
+								value: 'saletime',
+							},
+							{
+								text: 'Colors',
+								value: "colorlabel",
+							},
+							{
+								text: 'Order Price',
+								value: 'pricelabel',
+							},
+							{
+								text: 'Sale Price',
+								value: 'pricelabel2',
+							},
+							{
+								text: 'Ordered By',
+								value: 'orderedby',
+							},
+							{
+								text: 'Bought By',
+								value: 'boughtby',
+							},
+						]
+					},
+				}
+			})
+
+			window.addEventListener("message", (event) => {
+				switch (event.data.action) {
+					case "close":
+						$(".main").animate({
+							top: "-50%"
+						}, 250)
+						$(".main2").animate({
+							top: "-50%"
+						}, 250)
+						$(".main3").animate({
+							top: "-50%"
+						}, 250)
+						$(".main4").animate({
+							top: "-50%"
+						}, 250)
+						$(".main5").animate({
+							top: "-50%"
+						}, 250)
+						setTimeout(function() {
+							$.post(`https://zerio-cardealer/Close`)
+							viewmodel.open = false
+							viewmodel.open2 = false
+							viewmodel.open3 = false
+							viewmodel.open4 = false
+						}, 250)
+						break;
+					case "open":
+						viewmodel.open = true
+						viewmodel.topHeader = event.data.data.label
+						viewmodel.categories = event.data.data.categories
+						viewmodel.isJobless = event.data.data.job == undefined ? true : false
+						viewmodel.allowdiscount = event.data.data.allowdiscount
+
+						if (viewmodel.isJobless == false) {
+							viewmodel.load_homepage()
+							viewmodel.set_tab("homepage")
+						}
+						else {
+							viewmodel.set_tab("categories")
+						}
+
+						$(".main").animate({
+							top: "50%"
+						}, 250)
+						break;
+					case "openshowcase":
+						viewmodel.open2 = true
+						viewmodel.topHeader = event.data.data.label
+						viewmodel.showcasecars = event.data.data.cars
+						viewmodel.isJobless = event.data.data.job == undefined ? true : false
+
+						$(".main2").animate({
+							top: "50%"
+						}, 250)
+						break;
+					case "opencatalogue":
+						viewmodel.open3 = true
+						viewmodel.topHeader = event.data.data.label
+						viewmodel.cataloguecars = event.data.data.cars
+						viewmodel.isJobless = event.data.data.job == undefined ? true : false
+
+						$(".main3").animate({
+							top: "50%"
+						}, 250)
+						break;
+					case "opentestdrive":
+						viewmodel.open5 = true
+						viewmodel.topHeader = event.data.data.label
+						viewmodel.testdrivecars = event.data.data.cars
+						viewmodel.players = event.data.data.players
+						viewmodel.isJobless = event.data.data.job == undefined ? true : false
+
+						$(".main5").animate({
+							top: "50%"
+						}, 250)
+						break;
+					case "openadminmenu":
+						viewmodel.open4 = true
+
+						$(".main4").animate({
+							top: "50%"
+						}, 250)
+
+						viewmodel.set_tab('addvehicle');
+						viewmodel.load_addvehicle()
+						break;
+					case "buyvehiclerequest":
+						var customButtons = Notifications.mixin({
+							customClass: {
+							confirmButton: 'btn btn-success',
+							cancelButton: 'btn btn-danger'
+							},
+							buttonsStyling: false
+						})
+						customButtons.fire({
+							title: 'Confirm Vehicle Purchase?',
+							text: `Are you sure you want to buy a ${event.data.vehicleData.model} for ${event.data.vehicleData.pricelabel2}?`,
+							icon: 'info',
+							showCancelButton: true,
+							confirmButtonText: 'Yes!',
+							cancelButtonText: 'No!',
+							reverseButtons: false
+						}).then((result) => {
+							$(".main").animate({
+								top: "-50%"
+							}, 250)
+							$(".main2").animate({
+								top: "-50%"
+							}, 250)
+							setTimeout(function() {
+								$.post(`https://zerio-cardealer/Close`)
+								viewmodel.open = false
+								viewmodel.open2 = false
+							}, 250)
+							if (result.isConfirmed) {
+								event.data.vehicleData.colors.primary = Number(viewmodel.items[Number(event.data.vehicleData.colors.primary) + 1].id)
+								event.data.vehicleData.colors.secondary = Number(viewmodel.items[Number(event.data.vehicleData.colors.secondary) + 1].id)
+								$.post("https://zerio-cardealer/buy", JSON.stringify({
+									vehData: event.data.vehicleData
+								}), function(result) {
+									if (result == true) {
+										customButtons.fire({
+											timer: 2000,
+											title: 'Bought!',
+											text: `You bought a car for ${event.data.vehicleData.pricelabel2}.`,
+											icon: 'success'
+										})
+									} else {
+										customButtons.fire({
+											timer: 2000,
+											title: 'Not enough money',
+											text: `You currently dont have enough money to afford this!`,
+											icon: 'error',
+										})
+									}
+								})
+							} else if (
+							result.dismiss === Notifications.DismissReason.cancel
+							) {
+						        customButtons.fire({
+                                    timer: 5000,
+									title: 'Cancelled',
+									text: 'You chose not to buy the car',
+									icon: 'error'
+                                })
+							}
+						})
+						break;
+				}
+			})
+
+			window.addEventListener('keydown', (event) => {
+				if (event.keyCode == 27) {
+					$(".main").animate({
+						top: "-50%"
+					}, 250)
+					$(".main2").animate({
+						top: "-50%"
+					}, 250)
+					$(".main3").animate({
+						top: "-50%"
+					}, 250)
+					$(".main4").animate({
+						top: "-50%"
+					}, 250)
+					$(".main5").animate({
+						top: "-50%"
+					}, 250)
+					setTimeout(function() {
+						$.post(`https://zerio-cardealer/Close`)
+						viewmodel.open = false
+						viewmodel.open2 = false
+						viewmodel.open3 = false
+						viewmodel.open4 = false
+						viewmodel.open5 = false
+					}, 250)
+				}
+			})
+
+			$("body").on("wheel", ".main2 .container.container--fluid .row.row--dense", (evt) => {
+				$(".main2 .container.container--fluid .row.row--dense").scrollLeft($(".main2 .container.container--fluid .row.row--dense").scrollLeft() + evt.originalEvent.deltaY);
+			});
+        </script>
+    </body>
+</html>

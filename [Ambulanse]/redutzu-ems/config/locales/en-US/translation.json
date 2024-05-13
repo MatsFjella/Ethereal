@@ -1,0 +1,292 @@
+{
+    "dashboard": {
+        "title": "Velkommen tilbake, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Varsler",
+        "citizens": "Innbyggere",
+        "invoices": "Fakturaer",
+        "doctors": "Online leger"
+    },
+    "alerts": {
+        "title": "Varsler",
+        "subtitle": "Se ambulansevarsler i sanntid",
+        "form": "Send et varsel",
+        "button": "Send varsel",
+        "name": "Varseltittel",
+        "description": "Beskrivelse",
+        "map_settings": "Kartinnstillinger",
+        "notification": {
+            "take": {
+                "title": "Varsling",
+                "message": "Vil du ta dette varselet?"
+            },
+            "sent": {
+                "title": "Varsel sendt",
+                "message": "Du sendte varselet til de andre legene!"
+            },
+            "opened": {
+                "title": "Nytt varsel",
+                "message": "Du har et nytt varsel! Gå til varslingsfanen for å se den."
+            },
+            "closed": {
+                "title": "Nytt varsel",
+                "message": "Du har et nytt varsel! Åpne MDT og gå til varslingsfanen for å se den."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Hendelser",
+        "subtitle": "Søk etter hendelser",
+        "form": "Søk etter hendelser",
+        "create": "Lag en hendelse",
+        "button": "Lag hendelse",
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "players": "Innbyggere involvert",
+        "doctors": "Leger involvert",
+        "invoices": "Fakturaer",
+        "invoice_reduction": "Fakturareduksjon ({{amount}}kr)",
+        "invoice_full": "Faktura ({{amount}}kr) {{reduction}}",
+        "reducted": "redusert",
+        "screenshot": "Ta et skjermbilde",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Screenshot"
+        },
+        "incident": {
+            "title": "Hendelse #{{id}}",
+            "subtitle": "Denne hendelsen ble opprettet {{date}}"
+        },
+        "tooltip": {
+            "description": "Du kan redigere beskrivelsen"
+        },
+        "modal": {
+            "delete": {
+                "title": "Slett",
+                "message": "Vil du slette denne hendelsen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Feil",
+                "message": "Noe gikk galt under opprettelsen av hendelsen. Prøv på nytt!"
+            },
+            "update": {
+                "title": "Hendelsen er oppdatert",
+                "message": "Du har endret beskrivelsen av hendelsen #{{id}}"
+            },
+            "delete": {
+                "title": "Hendelsen er slettet",
+                "message": "Du har slettet hendelsen #{{id}}"
+            },
+            "success": {
+                "title": "Hendelsen opprettet",
+                "message": "Hendelse #{{id}} er opprettet"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Innbyggere",
+        "subtitle": "Søk etter borgere",
+        "form": "Søk etter innbyggere",
+        "incidents": "Hendelser",
+        "citizen": {
+            "title": "Borger",
+            "subtitle": "Se all informasjon om denne borgeren"
+        }
+    },
+    "codes": {
+        "title": "Koder",
+        "subtitle": "Søk eller lag koder",
+        "form": "Søk i koder",
+        "create": "Lag en kode",
+        "button": "Lag kode",
+        "name": "Navm",
+        "format": "Kode ({{format}})",
+        "code": {
+            "title": "Kode ({{code}})",
+            "subtitle": "Denne koden ble opprettet {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Slett",
+                "message": "Ønsker du å slette denne koden?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Feil",
+                "message": "Noe gikk galt med å lage koden. Prøv på nytt!"
+            },
+            "update": {
+                "title": "Koden er oppdatert",
+                "message": "Du har endret koden med id {{id}}"
+            },
+            "delete": {
+                "title": "Koden slettet",
+                "message": "Du har slettet koden #{{id}}"
+            },
+            "success": {
+                "title": "Kode opprettet",
+                "message": "Kode #{{id}} er opprettet"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Fakturaer",
+        "subtitle": "Søk eller opprett fakturaer",
+        "form": "Søk etter fakturaer",
+        "create": "Lag en faktura",
+        "button": "Opprett faktura",
+        "name": "Navn",
+        "amount": "Beløp",
+        "invoice": {
+            "title": "Faktura #{{id}}",
+            "subtitle": "Denne fakturaen ble opprettet {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Slett",
+                "message": "Ønsker du å slette denne fakturaen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Feil",
+                "message": "Noe gikk galt under opprettelsen av fakturaen. Prøv på nytt!"
+            },
+            "update": {
+                "title": "Faktura oppdatert",
+                "message": "Du har endret fakturaen med id {{id}}"
+            },
+            "delete": {
+                "title": "Faktura slettet",
+                "message": "Du har slettet fakturaen #{{id}}"
+            },
+            "success": {
+                "title": "Faktura opprettet",
+                "message": "Faktura nr. {{id}} er opprettet"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Leger",
+        "subtitle": "Se alle leger"
+    },
+    "configuration": {
+        "title": "Konfigurasjon",
+        "subtitle": "Tilpass MDT til din smak",
+        "colors": "Farger",
+        "main_color": "Hovedfarge",
+        "secondary_color": "Sekundær farge",
+        "third_color": "Tredje farge",
+        "highlight_color": "Fremhev farge",
+        "contrast_color": "Kontrastfarge",
+        "text_color": "Tekstfarge",
+        "language": "Språk",
+        "reset": "Tilbakestill innstillinger",
+        "placeholder": "🌎 Språk",
+        "tooltip": {
+            "language": "Dette alternativet vil ikke endre språket for alle brukere!"
+        }
+    },
+    "chat": {
+        "placeholder": "Skriv inn en melding.."
+    },
+    "errors": {
+        "no-permission": "Du har ikke tillatelse til å gjøre dette",
+        "incidents": {
+            "name": {
+                "length": "Navnet må være lengre enn 3 tegn",
+                "required": "Du må oppgi et navn"
+            },
+            "description": {
+                "length": "Beskrivelsen må være lengre enn 10 tegn",
+                "required": "Du må gi en beskrivelse"
+            },
+            "players": {
+                "length": "Du må velge minst 1 borger",
+                "required": "Du må velge en involvert borger"
+            },
+            "doctors": {
+                "length": "Du må velge minst 1 lege",
+                "required": "Du må velge en involvert lege"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Varselet må ha en tittel"
+            },
+            "description": {
+                "required": "Du må skrive noe i beskrivelsen av varselet"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Du må oppgi et navn"
+            },
+            "code": {
+                "required": "Du må oppgi en kode",
+                "format": "Kodeformatet er feil"
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Du må oppgi et navn"
+            },
+            "amount": {
+                "required": "Du må angi et beløp"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Ingen resultater"
+    },
+    "modal": {
+        "confirm": "Bekrefte",
+        "close": "Lukk"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Klikk på lagre-ikonet for å lagre verdiene",
+            "visit": "Klikk her for å besøke eierens profil",
+            "waypoint": "Klikk her for å angi et veipunkt til denne egenskapen",
+            "image": "Venstreklikk for å redigere bildet | Høyreklikk for å zoome bildet",
+            "clear": "Klikk her for å tømme skjemaet"
+        },
+        "modal": {
+            "clear_title": "Klar form",
+            "clear_message": "Er du sikker på at du vil slette skjemaverdiene?"
+        }
+    },
+    "words": {
+        "error": "Feil",
+        "search": "Søk",
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "amount": "Beløp",
+        "information": "Informasjon",
+        "firstname": "Fornavn",
+        "lastname": "Etternavn",
+        "gender": "Kjønn",
+        "birth": "Fødselsdato",
+        "fingerprint": "Fingeravtrykk",
+        "phone": "Telefonnummer",
+        "job": "Jobb",
+        "yes": "Ja",
+        "no": "Nei",
+        "online": "Pålogget",
+        "offline": "Avlogget",
+        "exit": "Gå ut"
+    },
+    "pages": {
+        "dashboard": "Hovedside",
+        "incidents": "Hendelser",
+        "doctors": "Leger",
+        "alerts": "Varsler",
+        "citizens": "Innbyggere",
+        "invoices": "Fakturaer",
+        "codes": "Koder",
+        "config": "Konfig"
+    }
+}

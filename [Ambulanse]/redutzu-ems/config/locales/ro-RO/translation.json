@@ -1,0 +1,283 @@
+{
+    "dashboard": {
+        "title": "Bine ai revenit, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Alerte",
+        "citizens": "Cetateni",
+        "invoices": "Facturi",
+        "doctors": "Medici Online"
+    },
+    "alerts": {
+        "title": "Alerte",
+        "subtitle": "Vezi alertele Smurd in timp real",
+        "form": "Trimite o alerta",
+        "button": "Trimite alerta",
+        "name": "Titlu alerta",
+        "description": "Descriere",
+        "notification": {
+            "take": {
+                "title": "Alerta",
+                "message": "Vrei sa iei aceasta alerta?"
+            },
+            "sent": {
+                "title": "Alerta trimisa",
+                "message": "Ai trimis alerta celorlalti colegi Smurd!"
+            },
+            "opened": {
+                "title": "Alerta Noua",
+                "message": "Ai o noua alerta! Mergi in tab-ul alertelor pentru a o vedea."
+            },
+            "closed": {
+                "title": "Alerta Noua",
+                "message": "Ai o noua alerta! Deschide MDT-ul si mergi in tab-ul alertelor pentru a o vedea."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Incidente",
+        "subtitle": "Cauta incidente",
+        "form": "Cauta incidente",
+        "create": "Creaza un incident",
+        "button": "Creaza incident",
+        "name": "Nume",
+        "description": "Descriere",
+        "players": "Cetateni implicati",
+        "doctors": "Doctori implicati",
+        "invoices": "Facturi",
+        "invoice_reduction": "Factura redusa ({{amount}}$)",
+        "invoice_full": "Facturi ({{amount}}$) {{reduction}}",
+        "reducted": "redusa",
+        "screenshot": "Fa un screenshot",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Screenshot"
+        },
+        "incident": {
+            "title": "Incident #{{id}}",
+            "subtitle": "Incidentul a fost creat pe {{date}}"
+        },
+        "tooltip": {
+            "description": "Poti edita descrierea"
+        },
+        "modal": {
+            "delete": {
+                "title": "Sterge",
+                "message": "Vrei sa stergi incidentul?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Eroare",
+                "message": "Ceva a mers gresit in a crea incidentul, incearca din nou!"
+            },
+            "update": {
+                "title": "Incident modificat",
+                "message": "Ai modificat cu succes descrierea incidentului #{{id}}"
+            },
+            "delete": {
+                "title": "Incident sters",
+                "message": "Ai sters cu succes incidentul #{{id}}"
+            },
+            "success": {
+                "title": "Incident creat",
+                "message": "Incidentul #{{id}} a fost creat"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Cetateni",
+        "subtitle": "Cauta cetateni",
+        "form": "Cauta cetateni",
+        "incidents": "Incidents",
+        "citizen": {
+            "title": "Cetatean",
+            "subtitle": "Vezi toate informatiile despre acest cetatean"
+        }
+    },
+    "codes": {
+        "title": "Coduri",
+        "subtitle": "Cauta sau creaza coduri",
+        "form": "Cauta coduri",
+        "create": "Creaza un cod",
+        "button": "Creaza cod",
+        "name": "Nume",
+        "format": "Cod ({{format}})",
+        "code": {
+            "title": "Cod ({{code}})",
+            "subtitle": "Codul a fost creat pe {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Sterge",
+                "message": "Vrei sa stergi codul?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Eroare",
+                "message": "Ceva a mers prost in a crea codul, incearca din nou!"
+            },
+            "update": {
+                "title": "Cod modificat",
+                "message": "Ai modificat cu succes codul cu id {{id}}"
+            },
+            "delete": {
+                "title": "Cod sters",
+                "message": "Ai sters cu succes codul #{{id}}"
+            },
+            "success": {
+                "title": "Cod creat",
+                "message": "Cod #{{id}} a fost creat"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Facturi",
+        "subtitle": "Cauta sau creaza facturi",
+        "form": "Cauta facturi",
+        "create": "Creaza o factura",
+        "button": "Creaza factura",
+        "name": "Nume",
+        "amount": "Cantitate",
+        "invoice": {
+            "title": "Factura #{{id}}",
+            "subtitle": "Factura a fost creata pe {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Sterge",
+                "message": "Vrei sa stergi factura?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Eroare",
+                "message": "Ceva a mers prost in a crea factura, incearca din nou!"
+            },
+            "update": {
+                "title": "Factura modificata",
+                "message": "Ai modificat cu succes factura cu id {{id}}"
+            },
+            "delete": {
+                "title": "Factura stearsa",
+                "message": "Ai sters cu succes factura #{{id}}"
+            },
+            "success": {
+                "title": "Factura creata",
+                "message": "Factura #{{id}} a fost creata"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Doctori",
+        "subtitle": "Vezi toti doctorii"
+    },
+    "configuration": {
+        "title": "Configuratie",
+        "subtitle": "Modifica MDT-ul dupa bunul plac",
+        "colors": "Culori",
+        "main_color": "Culoare Principala",
+        "secondary_color": "Culoare Secundara",
+        "third_color": "A 3-a Culoare",
+        "highlight_color": "Culoarea de Evidenta",
+        "contrast_color": "Culoarea de Contrast",
+        "text_color": "Culoarea Textului",
+        "language": "Limba",
+        "reset": "Reseteaza setarile",
+        "placeholder": "🌎 Limba",
+        "tooltip": {
+            "language": "Aceasta optiune nu se aplica tuturor jucatorilor!"
+        }
+    },
+    "chat": {
+        "placeholder": "Scrie un mesaj.."
+    },
+    "errors": {
+        "incidents": {
+            "name": {
+                "length": "Numele trebuie sa contina mai mult de 3 caractere",
+                "required": "Trebuie sa specifici un nume"
+            },
+            "description": {
+                "length": "Descrierea trebuie sa fie mai lunga de 10 caractere",
+                "required": "Trebuie sa introduci o descriere"
+            },
+            "players": {
+                "length": "Trebuie sa selectezi cel putin un cetatean",
+                "required": "Trebuie sa selectezi un cetatean implicat"
+            },
+            "doctors": {
+                "length": "Trebuie sa selectezi cel putin un doctor",
+                "required": "Trebuie sa selectezi un doctor implicat"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Alerta trebuie sa aibe un titlu"
+            },
+            "description": {
+                "required": "Trebuie sa scrii ceva in descrierea alertei"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Trebuie sa specifici un nume"
+            },
+            "code": {
+                "required": "Trebuie sa specifici un cod",
+                "format": "Format-ul codului este invalid"
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Trebuie sa specifici un nume"
+            },
+            "amount": {
+                "required": "Trebuie sa specifici cantitatea"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Niciun rezultat gasit"
+    },
+    "modal": {
+        "confirm": "Confirma",
+        "close": "Inchide"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Apasa pe icon pentru a salva valorile",
+            "visit": "Apasa aici pentru a vizita profilul proprietarului",
+            "waypoint": "Apasa aici pentru a seta un waypoint pe aceasta proprietate",
+            "image": "Click stanga pentru a edita fotografia | Click dreapta pentru a da zoom pe fotografie"
+        }
+    },
+    "words": {
+        "search": "Cauta",
+        "name": "Nume",
+        "description": "Descriere",
+        "amount": "Cantitate",
+        "information": "Informatie",
+        "firstname": "Prenume",
+        "lastname": "Nume",
+        "gender": "Sex",
+        "birth": "Zi de nastere",
+        "phone": "Numar de telefon",
+        "job": "Loc de munca",
+        "yes": "Da",
+        "no": "Nu",
+        "online": "Online",
+        "offline": "Offline",
+        "exit": "Iesi"
+    },
+    "pages": {
+        "dashboard": "Dashboard",
+        "incidents": "Incidente",
+        "doctors": "Doctori",
+        "alerts": "Alerte",
+        "citizens": "Cetateni",
+        "invoices": "Facturi",
+        "codes": "Coduri",
+        "config": "Config"
+    }
+}

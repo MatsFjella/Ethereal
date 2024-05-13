@@ -1,0 +1,283 @@
+{
+    "dashboard": {
+        "title": "Witaj ponownie, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Powiadomienia",
+        "citizens": "Obywatele",
+        "invoices": "Faktury",
+        "doctors": "Dostępni Lekarze"
+    },
+    "alerts": {
+        "title": "Powiadomienia",
+        "subtitle": "Zobacz alerty pogotowia ratunkowego w czasie rzeczywistym",
+        "form": "Wyślij Powiadomienie",
+        "button": "Wyślij",
+        "name": "Tytuł",
+        "description": "Opis",
+        "notification": {
+            "take": {
+                "title": "Powiadominie",
+                "message": "Chcesz podjąć się tego wezwania?"
+            },
+            "sent": {
+                "title": "Wysłano Powiadomienie",
+                "message": "Wysłałeś powiadomienie do innych lekarzy!"
+            },
+            "opened": {
+                "title": "Nowe Powiadomienie",
+                "message": "Masz nowe powiadomienie, odpal tablet aby je obejrzeć!"
+            },
+            "closed": {
+                "title": "Nowe Powiadomienie",
+                "message": "Masz nowe powiadomienie, odpal tablet aby je obejrzeć!"
+            }
+        }
+    },
+    "incidents": {
+        "title": "Akta",
+        "subtitle": "Szukaj Akt",
+        "form": "Szukaj Akt",
+        "create": "Stwórz akta",
+        "button": "Stwórz",
+        "name": "Tytuł",
+        "description": "Opis",
+        "players": "Zaangażowani Obywatele",
+        "doctors": "Zaangażowani Lekarze",
+        "invoices": "Faktury",
+        "invoice_reduction": "Redukcja faktury ({{amount}}$)",
+        "invoice_full": "Faktura ({{amount}}$) {{reduction}}",
+        "reducted": "Redukcja",
+        "screenshot": "Załącz Zdjęcie",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Zrób Zdjęcie"
+        },
+        "incident": {
+            "title": "Akta #{{id}}",
+            "subtitle": "Akta zostały stworzone dnia {{date}}"
+        },
+        "tooltip": {
+            "description": "Możesz zmienić opis"
+        },
+        "modal": {
+            "delete": {
+                "title": "Usuń",
+                "message": "Jesteś pewny, że chcesz usunąć te Akta?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Coś poszło nie tak, spróbuj ponownie później!"
+            },
+            "update": {
+                "title": "Akta zaktualizowane",
+                "message": "Pomyślnie zmieniłeś opis akt o numerze #{{id}}"
+            },
+            "delete": {
+                "title": "Akta Usunięte",
+                "message": "Pomyślnie usunąłeś akta o numerze #{{id}}"
+            },
+            "success": {
+                "title": "Akta stworzone",
+                "message": "Akta #{{id}} zostały stworzone"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Obywatele",
+        "subtitle": "Szukaj Obywatela",
+        "form": "Szukaj Obywatela",
+        "incidents": "Akta",
+        "citizen": {
+            "title": "Obywatel",
+            "subtitle": "Pokaż wszystkie informacje na temat tego Obywatela"
+        }
+    },
+    "codes": {
+        "title": "Kody",
+        "subtitle": "Szukaj bądź Stwórz Kod",
+        "form": "Szukaj Kodu",
+        "create": "Stwórz Kod",
+        "button": "Stwórz",
+        "name": "Tytuł",
+        "format": "Kod ({{format}})",
+        "code": {
+            "title": "Kod ({{code}})",
+            "subtitle": "Kod został stworzony dnia {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Usuń",
+                "message": "Jesteś pewny, że chcesz usunąć ten Kod?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Coś poszło nie tak, spróbuj ponownie później!"
+            },
+            "update": {
+                "title": "Kod Zaktualizowany",
+                "message": "Pomyślnie zmieniłeś Kod o numerze {{id}}"
+            },
+            "delete": {
+                "title": "Kod Usunięty",
+                "message": "Pomyślnie usunąłeś kod #{{id}}"
+            },
+            "success": {
+                "title": "Kod Stworzony",
+                "message": "Kod #{{id}} został stworzony"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Faktury",
+        "subtitle": "Szukaj bądź stwórz Fakturę",
+        "form": "Szukaj Faktury",
+        "create": "Stwórz Fakturę",
+        "button": "Stwórz",
+        "name": "Tytuł",
+        "amount": "Kwota",
+        "invoice": {
+            "title": "Faktura #{{id}}",
+            "subtitle": "Faktura została stworzona dnia {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Usunąć?",
+                "message": "Jesteś pewny, że chcesz usunąć tę fakturę?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Coś poszło nie tak, spróbuj ponownie później!"
+            },
+            "update": {
+                "title": "Faktura Zaktualizowana",
+                "message": "Pomyślnie zaktualizowałeś fakturę o numerze {{id}}"
+            },
+            "delete": {
+                "title": "Faktura Usunięta",
+                "message": "Pomyślnie usunąłeś fakturę o numerze #{{id}}"
+            },
+            "success": {
+                "title": "Faktura Stworzona",
+                "message": "Faktura #{{id}} została stworzona"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Lekarze",
+        "subtitle": "Pokaż wszystkich lekarzy"
+    },
+    "configuration": {
+        "title": "Konfiguracja",
+        "subtitle": "Ustaw swój tablet do twoich potrzeb",
+        "colors": "Kolor",
+        "main_color": "Kolor Główny",
+        "secondary_color": "Drugi Kolor",
+        "third_color": "Trzeci kolor",
+        "highlight_color": "Kolor podświetlenia",
+        "contrast_color": "Kontrast",
+        "text_color": "Kolor textu",
+        "language": "Język",
+        "reset": "Resetuj Ustawienia",
+        "placeholder": "🌎 Język",
+        "tooltip": {
+            "language": "Ta opcja zmieni język tylko u ciebie"
+        }
+    },
+    "chat": {
+        "placeholder": "Napisz wiadomość..."
+    },
+    "errors": {
+        "incidents": {
+            "name": {
+                "length": "Tytuł musi zawierać minimum 3 znaki",
+                "required": "Musisz wpisać tytuł."
+            },
+            "description": {
+                "length": "Opis musi zawierać minimum 10 znaków",
+                "required": "Musisz coś napisać w Opisie."
+            },
+            "players": {
+                "length": "Musisz wybrać minimum jednego Obywatela",
+                "required": "Musisz wybrać Obywatela"
+            },
+            "doctors": {
+                "length": "Musisz wybrać minimum jednego Lekarza",
+                "required": "Musisz wybrać Lekarza."
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Powiadomienie musi zawierać Tytuł"
+            },
+            "description": {
+                "required": "Musisz wpisać cokolwiek w opisie."
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Musisz wpisać tytuł."
+            },
+            "code": {
+                "required": "Musisz wpisać kod",
+                "format": "Format kodu jest nieprawidłowy."
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Musisz wpisać tytuł."
+            },
+            "amount": {
+                "required": "Musisz ustalić kwotę"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Brak Wpisów"
+    },
+    "modal": {
+        "confirm": "Potwierdź",
+        "close": "Zamknij"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Kliknij ikonę zapisywania, aby zapisać wartości",
+            "visit": "Kliknij tutaj, aby przejść do profilu właściciela",
+            "waypoint": "Kliknij tutaj, aby ustawić punkt trasy do tej posiadłości",
+            "image": "Kliknij LPM, aby edytować obraz | Kliknij PPM, aby powiększyć obraz"
+        }
+    },
+    "words": {
+        "search": "Szukaj",
+        "name": "Tytuł",
+        "description": "Opis",
+        "amount": "Kwota",
+        "information": "Informacje",
+        "firstname": "Imię",
+        "lastname": "Nazwisko",
+        "gender": "Płeć",
+        "birth": "Data Urodzenia",
+        "phone": "Numer Telefonu",
+        "job": "Zawód",
+        "yes": "Tak",
+        "no": "Nie",
+        "online": "Online",
+        "offline": "Offline",
+        "exit": "Wyjdź"
+    },
+    "pages": {
+        "dashboard": "Pulpit",
+        "incidents": "Akta",
+        "doctors": "Lekarze",
+        "alerts": "Powiadomienia",
+        "citizens": "Obywatele",
+        "invoices": "Faktury",
+        "codes": "Kody",
+        "config": "Ustawienia"
+    }
+}

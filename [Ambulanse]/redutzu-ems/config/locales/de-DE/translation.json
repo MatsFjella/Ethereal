@@ -1,0 +1,283 @@
+{
+    "dashboard": {
+        "title": "Willkommen zurück, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Meldungen",
+        "citizens": "Bürger",
+        "invoices": "Rechnungen",
+        "doctors": "Anwesende Ärzte"
+    },
+    "alerts": {
+        "title": "Meldungen",
+        "subtitle": "Echtzeit-Ambulanzwarnungen anzeigen",
+        "form": "Senden Sie eine Meldung",
+        "button": "Meldung abschicken",
+        "name": "Titel des Alarms",
+        "description": "Beschreibung",
+        "notification": {
+            "take": {
+                "title": "Meldung",
+                "message": "Möchten Sie diese Meldung annehmen?"
+            },
+            "sent": {
+                "title": "Meldung gesendet",
+                "message": "Sie haben den Alarm an die anderen Ärzte geschickt!"
+            },
+            "opened": {
+                "title": "Neue Meldung",
+                "message": "Sie haben eine neue Meldung! Gehen Sie auf die Registerkarte \"Meldungen\", um sie zu sehen."
+            },
+            "closed": {
+                "title": "Neue Meldung",
+                "message": "Sie haben eine neue Meldung! Öffnen Sie die MDT und gehen Sie auf die Registerkarte \"Meldungen\", um sie anzuzeigen."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Vorkommnisse",
+        "subtitle": "Suche nach Vorkommnissen",
+        "form": "Suche Vorkommnisse",
+        "create": "Ein Vorkommnis erstellen",
+        "button": "Vorkommnis erstellen",
+        "name": "Name",
+        "description": "Beschreibung",
+        "players": "Betroffene Bürger",
+        "doctors": "Beteiligte Ärzte",
+        "invoices": "Rechnungen",
+        "invoice_reduction": "Senkung der Rechnungssumme ({{amount}}$)",
+        "invoice_full": "Rechnungen ({{amount}}$) {{reduction}}",
+        "reducted": "ermäßigt",
+        "screenshot": "Machen Sie einen Screenshot",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Screenshot"
+        },
+        "incident": {
+            "title": "Vorkommnis #{{id}}",
+            "subtitle": "Dieses Ereignis wurde am {{date}} erstellt"
+        },
+        "tooltip": {
+            "description": "Sie können die Beschreibung bearbeiten"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie dieses Ereignis löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Beim Erstellen des Ereignisses ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Ereignis aktualisiert",
+                "message": "Sie haben die Beschreibung des Vorkommnisses #{{id}} erfolgreich geändert"
+            },
+            "delete": {
+                "title": "Ereignis gelöscht",
+                "message": "Sie haben das Vorkommnis #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Ereignis erstellt",
+                "message": "Vorkommnis #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Bürger",
+        "subtitle": "Suche nach Patienten",
+        "form": "Patient suchen",
+        "incidents": "Vorkommnisse",
+        "citizen": {
+            "title": "Patienten",
+            "subtitle": "Alle Informationen über diesen Patienten anzeigen"
+        }
+    },
+    "codes": {
+        "title": "Codes",
+        "subtitle": "Codes suchen oder erstellen",
+        "form": "Codes suchen",
+        "create": "Einen Code erstellen",
+        "button": "Code erstellen",
+        "name": "Name",
+        "format": "Code ({{format}})",
+        "code": {
+            "title": "Code ({{code}})",
+            "subtitle": "Dieser Code wurde am {{date}} erstellt"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diesen Code löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung des Codes ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Code aktualisiert",
+                "message": "Sie haben den Code mit der id {{id}} erfolgreich geändert"
+            },
+            "delete": {
+                "title": "Code gelöscht",
+                "message": "Sie haben den Code #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Code erstellt",
+                "message": "Code #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "invoices": {
+        "title": "Rechnungen",
+        "subtitle": "Rechnungen suchen oder erstellen",
+        "form": "Suche nach Rechnungen",
+        "create": "Eine Rechnung erstellen",
+        "button": "Rechnung erstellen",
+        "name": "Name",
+        "amount": "Betrag",
+        "invoice": {
+            "title": "Rechnung #{{id}}",
+            "subtitle": "Diese Rechnung wurde erstellt am {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diese Rechnung löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung der Rechnung ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Rechnung aktualisiert",
+                "message": "Sie haben die Rechnung mit der ID {{id}} erfolgreich geändert."
+            },
+            "delete": {
+                "title": "Rechnung gelöscht",
+                "message": "Sie haben die Rechnung #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Rechnung erstellt",
+                "message": "Rechnung #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "doctors": {
+        "title": "Ärzte",
+        "subtitle": "Alle Ärzte anzeigen"
+    },
+    "configuration": {
+        "title": "Konfiguration",
+        "subtitle": "Passen Sie das MDT nach Ihren Wünschen an",
+        "colors": "Farben",
+        "main_color": "Grundfarbe",
+        "secondary_color": "Sekundärfarbe",
+        "third_color": "Tertiärfarbe",
+        "highlight_color": "Hervorhebungsfarbe",
+        "contrast_color": "Kontrastfarbe",
+        "text_color": "Farbe des Textes",
+        "language": "Sprache",
+        "reset": "Einstellungen zurücksetzen",
+        "placeholder": "🌎 Sprache",
+        "tooltip": {
+            "language": "Mit dieser Option wird die Sprache nicht für alle Benutzer geändert!"
+        }
+    },
+    "chat": {
+        "placeholder": "Geben Sie eine Nachricht ein.."
+    },
+    "errors": {
+        "incidents": {
+            "name": {
+                "length": "Der Name muss länger als 3 Zeichen sein",
+                "required": "Sie müssen einen Namen angeben"
+            },
+            "description": {
+                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
+                "required": "Sie müssen eine Beschreibung angeben"
+            },
+            "players": {
+                "length": "Sie müssen mindestens 1 Bürger auswählen",
+                "required": "Sie müssen einen beteiligten Bürger auswählen"
+            },
+            "doctors": {
+                "length": "Sie müssen mindestens 1 Arzt auswählen",
+                "required": "Sie müssen einen beteiligten Arzt auswählen"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Die Ausschreibung muss einen Titel haben"
+            },
+            "description": {
+                "required": "Sie müssen etwas in die Beschreibung der Ausschreibung schreiben"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Sie müssen einen Namen angeben"
+            },
+            "code": {
+                "required": "Sie müssen einen Code angeben",
+                "format": "Das Codeformat ist falsch"
+            }
+        },
+        "invoices": {
+            "name": {
+                "required": "Sie müssen einen Namen angeben"
+            },
+            "amount": {
+                "required": "Sie müssen einen Betrag festlegen"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Keine Ergebnisse gefunden"
+    },
+    "modal": {
+        "confirm": "Bestätigen",
+        "close": "Schließen"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Klicken Sie auf das Speichersymbol, um die Werte zu speichern",
+            "visit": "Klicken Sie hier, um das Profil des Eigentümers zu besuchen",
+            "waypoint": "Klicken Sie hier, um einen Wegpunkt zu dieser Immobilie zu setzen",
+            "image": "Linksklick zum Bearbeiten des Bildes | Rechtsklick zum Zoomen des Bildes"
+        }
+    },
+    "words": {
+        "search": "Suche",
+        "name": "Name",
+        "description": "Beschreibung",
+        "amount": "Betrag",
+        "information": "Informationen",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "gender": "Geschlecht",
+        "birth": "Geburtsdatum",
+        "phone": "Telefonnummer",
+        "job": "Job",
+        "yes": "Ja",
+        "no": "Nein",
+        "online": "Online",
+        "offline": "Offline",
+        "exit": "Verlassen"
+    },
+    "pages": {
+        "dashboard": "Dashboard",
+        "incidents": "Vorkommnisse",
+        "doctors": "Ärzte",
+        "alerts": "Meldungen",
+        "citizens": "Patienten/Bürger",
+        "invoices": "Rechnungen",
+        "codes": "Codes",
+        "config": "Konfiguration"
+    }
+}
